@@ -12,4 +12,4 @@ Homework:
 - write user stories
 - write test cases
 
-- p
+- perm
