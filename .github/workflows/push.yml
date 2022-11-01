@@ -23,41 +23,34 @@ jobs:
         with:
           version: latest
           virtualenvs-create: true
-          virtualenvs-in-project: false
+          virtualenvs-in-project: true
           installer-parallel: true
 
-      #----------------------------------------------
-      #       load cached venv if cache exists
-      #----------------------------------------------
       - name: Load cached venv
         id: cached-poetry-dependencies
         uses: actions/cache@v3
         with:
           path: .venv
           key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
-      #----------------------------------------------
-      # install dependencies if cache does not exist
-      #----------------------------------------------
+
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-interaction --no-root
-      #----------------------------------------------
-      # install your root project, if required
-      #----------------------------------------------
 
       - name: Python Code Quality and Lint
-        uses: ricardochaves/python-lint@v1.4.0
-        with:
-          python-root-list: "."
-          use-pylint: false
-          use-pycodestyle: false
-          use-flake8: false
-          use-black: true
-          use-mypy: false
-          use-isort: false
-          extra-pylint-options: ""
-          extra-pycodestyle-options: ""
-          extra-flake8-options: ""
-          extra-black-options: "--exclude .venv"
-          extra-mypy-options: ""
-          extra-isort-options: ""
+        run: poetry run black . -v --exclude .venv
+#        uses: ricardochaves/python-lint@v1.4.0
+#        with:
+#          python-root-list: "."
+#          use-pylint: false
+#          use-pycodestyle: false
+#          use-flake8: true
+#          use-black: true
+#          use-mypy: false
+#          use-isort: false
+#          extra-pylint-options: ""
+#          extra-pycodestyle-options: ""
+#          extra-flake8-options: "--exclude .venv"
+#          extra-black-options: "-v --exclude .venv"
+#          extra-mypy-options: ""
+#          extra-isort-options: ""
