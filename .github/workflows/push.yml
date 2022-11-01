@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.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 }}
+          token: ${{ secrets.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 }}
       - name: Check files using the black formatter
         uses: rickstaa/action-black@v1
         id: action_black
