@@ -23,7 +23,7 @@ jobs:
         with:
           version: latest
           virtualenvs-create: true
-          virtualenvs-in-project: true
+          virtualenvs-in-project: false
           installer-parallel: true
 
       #----------------------------------------------
@@ -44,8 +44,6 @@ jobs:
       #----------------------------------------------
       # install your root project, if required
       #----------------------------------------------
-      - name: Install project
-        run: poetry install --no-interaction
 
       - name: Format code with Black
         uses: lgeiger/black-action@master
