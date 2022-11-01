@@ -13,8 +13,10 @@ jobs:
           black_args: "."
       - name: Create Pull Request
         if: steps.action_black.outputs.is_formatted == 'true'
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.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 }}
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           title: "Format Python code with psf/black push"
           commit-message: ":art: Format Python code with psf/black"
