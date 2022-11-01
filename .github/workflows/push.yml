@@ -6,7 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
       - name: Check files using the black formatter
         uses: rickstaa/action-black@v1
         id: action_black
@@ -14,10 +13,10 @@ jobs:
           black_args: ". --exclude .venv"
       - name: Create Commit
         if: steps.action_black.outputs.is_formatted == 'true'
-      - uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          token: ${{ secrets.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 }}
-          commit_message: Apply php-cs-fixer changes
+            token: ${{ secrets.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 }}
+            commit_message: Apply php-cs-fixer changes
 #        uses: peter-evans/create-pull-request@v4
 #        with:
 #          committer: GitHub <noreply@github.com>
