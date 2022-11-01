@@ -49,4 +49,5 @@ jobs:
 
       - name: Format code with Black
         uses: lgeiger/black-action@master
-        args: ". --exclude ./venv/ --check"
+        with:
+          args: ". --exclude .venv --check"
