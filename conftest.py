@@ -10,8 +10,10 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 def driver():
     options = Options()
-    options.add_argument('--start-maximized')
+    options.add_argument("--start-maximized")
     # options.add_argument('headless') # Run chrome without render page
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    driver = webdriver.Chrome(
+        service=Service(ChromeDriverManager().install()), options=options
+    )
     yield driver
     driver.quit()

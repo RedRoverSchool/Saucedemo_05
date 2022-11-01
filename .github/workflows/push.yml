@@ -45,7 +45,19 @@ jobs:
       # install your root project, if required
       #----------------------------------------------
 
-      - name: Format code with Black
-        uses: lgeiger/black-action@master
+      - name: Python Code Quality and Lint
+        uses: ricardochaves/python-lint@v1.4.0
         with:
-          args: ". --exclude .venv"
+          python-root-list: "."
+          use-pylint: false
+          use-pycodestyle: false
+          use-flake8: false
+          use-black: true
+          use-mypy: false
+          use-isort: false
+          extra-pylint-options: ""
+          extra-pycodestyle-options: ""
+          extra-flake8-options: ""
+          extra-black-options: "--exclude .venv"
+          extra-mypy-options: ""
+          extra-isort-options: ""
