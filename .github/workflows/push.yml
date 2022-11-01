@@ -15,6 +15,6 @@ jobs:
         if: steps.action_black.outputs.is_formatted == 'true'
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.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 }}
+          token: ${{ secrets.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 }}
           title: "Format Python code with psf/black push"
           commit-message: ":art: Format Python code with psf/black"
