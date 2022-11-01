@@ -6,6 +6,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 
 @pytest.fixture()
+
+
 def driver():
     options = Options()
     options.add_argument('--start-maximized')
