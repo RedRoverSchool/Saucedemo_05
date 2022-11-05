@@ -15,6 +15,11 @@ black = "^22.10.0"
 flake8 = "^5.0.4"
 
 
+[tool.poetry.group.dev.dependencies]
+pynvim = "^0.4.3"
+numpy = "^1.23.4"
+pandas = "^1.5.1"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
