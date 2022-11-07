@@ -1,19 +1,66 @@
-name: GitHub Actions
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push, request]
-jobs:
-  Explore-GitHub-Actions:
-    runs-on: ubuntu-latest
+name: selenium_test
+on: [push, pull_request]
 
+permissions:
+  checks: write
+  pull-requests: write
+  contents: read
+
+jobs:
+  selenium_test:
+    runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
+      - name: Check out this repo
         uses: actions/checkout@v3
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Check code for errors by flake8 and format code with black
+        uses: ricardochaves/python-lint@v1.4.0
+        with:
+          python-root-list: ""
+          use-pylint: false
+          use-pycodestyle: false
+          use-flake8: true
+          use-black: true
+          use-mypy: false
+          use-isort: false
+          extra-pylint-options: ""
+          extra-pycodestyle-options: ""
+          extra-flake8-options: "--count --benchmark --ignore=E501"
+          extra-black-options: ". -S"
+          extra-mypy-options: ""
+          extra-isort-options: ""
+      - name: Update repo
+        run: sudo apt-get update
+      - name: Install software
+        run: sudo apt-get install -y chromium-browser firefox
+      - name: Check Chromium version
+        run: chromium-browser --version
+      - name: Check Firefox version
+        run: firefox --version
+      - name: Install poetry
+        run: curl -sSL https://install.python-poetry.org | python3 -
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v3
+        with:
+          path: deployer/.venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}-${{ hashFiles('.github/workflows/pr-deployer.yml') }}
+      - name: Install dependencies
+        run: poetry install
+      - name: Run pytest
+        run: poetry run pytest
+      - name: Run the pytest and generate junit xml report
+        run: poetry run pytest --junitxml report.xml
+      - name: Create test summary
+        uses: test-summary/action@v2.0
+        with:
+          paths: report.xml
+        if: always()
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          junit_files: "report.xml"
