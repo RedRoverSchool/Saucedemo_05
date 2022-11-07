@@ -6,14 +6,12 @@ from pprint import pprint
 
 
 def browser():
-    # Функция создания драйвера
     browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     browser.maximize_window()
     return browser
 
 
 def get_all_product(browser: webdriver.Chrome):
-    # Функция  получения данных о товарах со страницы сайта
     browser.get("https://www.saucedemo.com/")
 
     assert browser.current_url == "https://www.saucedemo.com/"
@@ -26,9 +24,9 @@ def get_all_product(browser: webdriver.Chrome):
 
     inventory_list = browser.find_elements(By.CSS_SELECTOR, ".inventory_item")
 
-    list_inventory = []  # Пустой массив для сохранения всех продуктов
+    list_inventory = []
 
-    for product in inventory_list:             # смотрим по одному элементу
+    for product in inventory_list:
         inventory_item_name = product.find_element(By.CSS_SELECTOR, '.inventory_item_name').text
         inventory_item_price = product.find_element(By.CSS_SELECTOR, '.inventory_item_price').text
         inventory_item_desc = product.find_element(By.CSS_SELECTOR, ".inventory_item_desc").text
@@ -55,10 +53,10 @@ def sort_price_low_to_high(browser: webdriver.Chrome):
     browser.find_element(By.CSS_SELECTOR, '.product_sort_container :nth-child(3)').click()
 
     inventory_list = browser.find_elements(By.CSS_SELECTOR, ".inventory_item")
-    list_inventory = []  # Пустой массив для сохранения всех продуктов
+    list_inventory = []
 
-    for product in inventory_list:  # смотрим по одному элементу
-        inventory_item_name = product.find_element(By.CSS_SELECTOR, '.inventory_item_name').text
+    for product in inventory_list:
+        # inventory_item_name = product.find_element(By.CSS_SELECTOR, '.inventory_item_name').text
         inventory_item_price = product.find_element(By.CSS_SELECTOR, '.inventory_item_price').text
 
         list_inventory.append(inventory_item_price, )
