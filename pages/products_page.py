@@ -1,22 +1,19 @@
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 from selenium import webdriver
 from pprint import pprint
-from collections import OrderedDict
 
 
 def browser():
-    """Функция  создания драйвера"""
+    # Функция создания драйвера
     browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     browser.maximize_window()
     return browser
 
+
 def get_all_product(browser: webdriver.Chrome):
-    """Функция  получения данных о товарах со страницы сайта"""
+    # Функция  получения данных о товарах со страницы сайта
     browser.get("https://www.saucedemo.com/")
 
     assert browser.current_url == "https://www.saucedemo.com/"
@@ -28,11 +25,6 @@ def get_all_product(browser: webdriver.Chrome):
     assert browser.current_url == "https://www.saucedemo.com/inventory.html"
 
     inventory_list = browser.find_elements(By.CSS_SELECTOR, ".inventory_item")
-
-    # inventory_item_name = browser.find_element(By.CSS_SELECTOR, '.inventory_item_name').text    # Получение названия товара
-    # inventory_item_desc = browser.find_element(By.CSS_SELECTOR, ".inventory_item_desc").text    # Получение описания товара
-    # inventory_item_price = browser.find_element(By.CSS_SELECTOR, '.inventory_item_price').text  # Получение цены товара
-    # link_img_product = browser.find_element(By.CSS_SELECTOR, ".inventory_item_img .inventory_item_img").get_attribute('src') # Получение линка на товара
 
     list_inventory = []  # Пустой массив для сохранения всех продуктов
 
@@ -48,6 +40,7 @@ def get_all_product(browser: webdriver.Chrome):
         })
 
     return list_inventory
+
 
 def sort_price_low_to_high(browser: webdriver.Chrome):
 
