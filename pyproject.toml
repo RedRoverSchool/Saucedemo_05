@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "saucedemo-05"
+name = "saucedemo05"
 version = "0.1.0"
 description = ""
 authors = ["akioikeda <principewar@live.com>"]

@@ -47,16 +47,17 @@ def get_all_product(browser: webdriver.Chrome):
             '3_description': inventory_item_desc,
         })
 
+    return list_inventory
 
 def sort_price_low_to_high(browser: webdriver.Chrome):
 
-    browser.get("https://www.saucedemo.com/")
-    assert browser.current_url == "https://www.saucedemo.com/"
+    # browser.get("https://www.saucedemo.com/")
+    # assert browser.current_url == "https://www.saucedemo.com/"
 
-    browser.find_element(By.XPATH, "//input[@id='user-name']").send_keys("standard_user")
-    browser.find_element(By.XPATH, "//input[@id='password']").send_keys("secret_sauce")
-    browser.find_element(By.XPATH, "//input[@id='login-button']").click()
-    assert browser.current_url == "https://www.saucedemo.com/inventory.html"
+    # browser.find_element(By.XPATH, "//input[@id='user-name']").send_keys("standard_user")
+    # browser.find_element(By.XPATH, "//input[@id='password']").send_keys("secret_sauce")
+    # browser.find_element(By.XPATH, "//input[@id='login-button']").click()
+    # assert browser.current_url == "https://www.saucedemo.com/inventory.html"
 
     browser.find_element(By.CSS_SELECTOR, '.product_sort_container :nth-child(3)').click()
 
@@ -79,9 +80,8 @@ def sort_price_low_to_high(browser: webdriver.Chrome):
     for i in range(0, len(price_list) - 1):
         assert (price_list[i] <= price_list[i + 1])
 
-
     browser.quit()
-    return price_listpytest --fixtures
+    return price_list
 
 
 if __name__ == '__main__':
