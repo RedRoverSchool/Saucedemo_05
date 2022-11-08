@@ -1,5 +1,10 @@
 name: black reformat
-on: push
+description: 'reformat code using black when pushed in any branch, exclude main and develop'
+on:
+  push:
+    branches-ignore:
+      - 'main'
+      - 'develop'
 jobs:
   linter_name:
     name: runner/black
