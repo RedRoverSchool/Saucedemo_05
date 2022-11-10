@@ -4,8 +4,8 @@ from conf.users import users
 from pages.login_page.login_page import LoginPage
 import time
 
-
 LOGIN_PAGE_URL = 'https://www.saucedemo.com/'
+
 
 class TestLoginPage:
     @allure.epic('Login Page Test')
