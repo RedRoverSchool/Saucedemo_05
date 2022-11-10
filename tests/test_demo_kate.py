@@ -42,9 +42,7 @@ class BasePage(BaseTest):
         self.driver.find_element(By.ID, 'add-to-cart-sauce-labs-bike-light').click()
         self.driver.find_element(By.ID, 'add-to-cart-sauce-labs-onesie').click()
 
-        # make sure cart is counting right sum of items every click
-        count_item_3 = self.driver.find_element(By.CLASS_NAME, 'shopping_cart_badge').text
-        self.assertEqual('3', count_item_3)
+
 
 
 
