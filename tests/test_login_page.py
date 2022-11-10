@@ -22,5 +22,3 @@ class TestLoginPage:
             password=users["standard_user"]["password"],
         )
         print(login_page.get_page_title())
-
-
