@@ -1,5 +1,4 @@
 name: black reformat
-description: 'reformat code using black when pushed in any branch, exclude main and develop'
 on:
   push:
     branches-ignore:
