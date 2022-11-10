@@ -11,7 +11,11 @@ from conf.browser_config import browser_config
 # from webdriver_manager.firefox import GeckoDriverManager
 
 @pytest.fixture
-def set_chrome_options(headless: bool = False, proxy_server: str = '', user_agent: str = ''):
+def set_chrome_options():
+    headless = browser_config['headless']
+    proxy_server = browser_config['proxy_server']
+    user_agent = browser_config['user_agent']
+
     options = ChromeOptions()
     options.add_argument('--start-maximized')
     options.add_argument('--no-sandbox')
@@ -37,10 +41,8 @@ def set_chrome_options(headless: bool = False, proxy_server: str = '', user_agen
 
 
 @pytest.fixture(scope='function')
-def browser():
-    browser = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()),
-                               options=set_chrome_options(headless=browser_config['headless'],
-                                                          proxy_server=browser_config['proxy_server'],
-                                                          user_agent=browser_config['user_agent']))
+def browser(set_chrome_options):
+    options = set_chrome_options
+    browser = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
     yield browser
     browser.quit()
