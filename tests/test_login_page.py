@@ -8,6 +8,14 @@ from pages.inventory_page.inventory_page import InventoryPage
 LOGIN_PAGE_URL = "https://www.saucedemo.com/"
 INVENTORY_URL = "https://www.saucedemo.com/inventory.html"
 
+failed_users_test_cases = (
+    ("locked_out_user", "Epic sadface: Sorry, this user has been locked out."),
+    (
+        "unregistered_user",
+        "Epic sadface: Username and password do not match any user in this service",
+    ),
+)
+
 
 class TestLoginPage:
     @allure.epic("Login Page Test")
@@ -31,35 +39,16 @@ class TestLoginPage:
         assert len(inventor_items) == 6, "The number of items cards is not equal to 6"
 
     @allure.epic("Login Page Test")
-    @allure.story("US_001.00 | Login Page > Login (Login Locked Out User)")
-    def test_login_locked_out_user(self, browser):
+    @allure.story("TC_001.00.02 | Try to login unregistered/locked out user")
+    @pytest.mark.parametrize("user, msg", failed_users_test_cases)
+    def test_login_locked_out_user(self, browser, user, msg):
         login_page = LoginPage(browser, url=LOGIN_PAGE_URL)
         login_page.open()
         login_page.login_user(
-            username=users["locked_out_user"]["username"],
-            password=users["locked_out_user"]["password"],
+            username=users[user]["username"],
+            password=users[user]["password"],
         )
-        assert (
-            login_page.get_alert_text()
-            == "Epic sadface: Sorry, this user has been locked out."
-        )
-
-    @allure.epic("Login Page Test")
-    @allure.story(
-        "TC_001.00.02 | Try to login unregistered user (incorrect login, correct pass)"
-    )
-    @pytest.mark.smoke
-    def test_login_unregistered_user(self, browser):
-        login_page = LoginPage(browser, url=LOGIN_PAGE_URL)
-        login_page.open()
-        login_page.login_user(
-            username="unregistered_user",
-            password="secret_sauce",
-        )
-        assert (
-            login_page.get_alert_text()
-            == "Epic sadface: Username and password do not match any user in this service"
-        )
+        assert login_page.get_alert_text() == msg
 
     @allure.epic("Login Page Test")
     @allure.story("Try to navigate to inventory page while logged out")

@@ -6,4 +6,5 @@ users = {
         "username": "performance_glitch_user",
         "password": "secret_sauce",
     },
+    "unregistered_user": {"username": "unregistered_user", "password": "secret_sauce"},
 }
