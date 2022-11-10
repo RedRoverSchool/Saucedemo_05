@@ -20,8 +20,6 @@ class BaseTest(unittest.TestCase):
 
 class BasePage(BaseTest):
     def test_sausedemo_tc002_00_01(self):
-        #verifyin I am on a right page with a right title
-        self.assertEqual('Swag Labs', self.driver.title)
 
         #login as an authorithed user
         self.driver.find_element(By.ID, 'user-name').send_keys(user_name)
