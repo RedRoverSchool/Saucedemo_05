@@ -21,13 +21,13 @@ class TestLoginPage:
             username=users["standard_user"]["username"],
             password=users["standard_user"]["password"],
         )
-        print(f"Navigated to {login_page.get_current_url()}")
+        # print(f"Navigated to {login_page.get_current_url()}")
         inventory_page = InventoryPage(browser, url=INVENTORY_URL)
         inventor_items = inventory_page.find_items_cards()
         inventory_page.open_burger_menu()
         time.sleep(1)
         inventory_page.click_logout_from_burger_menu()
-        print(f"Navigated to {inventory_page.get_current_url()}")
+        # print(f"Navigated to {inventory_page.get_current_url()}")
         assert len(inventor_items) == 6, "The number of items cards is not equal to 6"
 
     @allure.epic("Login Page Test")
