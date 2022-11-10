@@ -8,5 +8,5 @@ class LoginPage(BasePage):
         self.send_keys_to_input(LoginPageLocators.INPUT_USER_NAME, username)
         # self.highlight_web_element(LoginPageLocators.INPUT_PASSWORD)
         self.send_keys_to_input(LoginPageLocators.INPUT_PASSWORD, password)
-        # self.hover(LoginPageLocators.BTN_LOGIN)
+        # self.move_to_element(LoginPageLocators.BTN_LOGIN)
         self.click_button(LoginPageLocators.BTN_LOGIN)

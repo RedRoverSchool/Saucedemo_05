@@ -2,6 +2,7 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.chrome.webdriver import WebDriver
 from webdriver_manager.chrome import ChromeDriverManager
 from conf.browser_config import browser_config
 
@@ -45,7 +46,7 @@ def set_chrome_options():
 @pytest.fixture(scope="function")
 def browser(set_chrome_options):
     options = set_chrome_options
-    browser = webdriver.Chrome(
+    browser: WebDriver = webdriver.Chrome(
         service=ChromeService(ChromeDriverManager().install()), options=options
     )
     browser.maximize_window()

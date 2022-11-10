@@ -16,7 +16,9 @@ class TestLoginPage:
         """Login using registered user credentials."""
         login_page = LoginPage(browser, url=LOGIN_PAGE_URL)
         login_page.open()
+        print(login_page.get_page_title())
         login_page.login_user(
             username=users["standard_user"]["username"],
             password=users["standard_user"]["password"],
         )
+        print(login_page.get_page_title())
