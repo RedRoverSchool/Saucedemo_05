@@ -13,3 +13,4 @@ class TestLoginPage:
     def test_login_registered_user(self, browser):
         login_page = LoginPage(browser, url=LOGIN_PAGE_URL)
         login_page.login_user(username=users['standard_user']['username'], password=users['standard_user']['password'])
+

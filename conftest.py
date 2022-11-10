@@ -17,7 +17,6 @@ def set_chrome_options():
     user_agent = browser_config['user_agent']
 
     options = ChromeOptions()
-    options.add_argument('--start-maximized')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('no-first-run')
@@ -44,5 +43,6 @@ def set_chrome_options():
 def browser(set_chrome_options):
     options = set_chrome_options
     browser = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+    browser.maximize_window()
     yield browser
     browser.quit()
