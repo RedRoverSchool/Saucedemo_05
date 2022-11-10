@@ -19,6 +19,9 @@ class BasePage:
     def open(self):
         self.browser.get(self.url)
 
+    def navigate_to(self, url: str):
+        self.browser.get(url)
+
     def element_is_visible(self, locator) -> WebElement:
         return self.wait.until(EC.visibility_of_element_located(locator))
 

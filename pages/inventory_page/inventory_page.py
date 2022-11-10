@@ -12,3 +12,9 @@ class InventoryPage(BasePage):
     def click_side_menu_item(self, locator):
         self.open_burger_menu()
         self.click_button(locator)
+
+    def click_logout_from_burger_menu(self):
+        self.click_button(InventoryPageLocators.BURGER_MENU_LOGOUT)
+
+    def find_items_cards(self):
+        return self.elements_are_present(InventoryPageLocators.ITEMS_CARDS)

@@ -8,6 +8,7 @@ class InventoryPageLocators:
     BURGER_MENU_ABOUT = (By.CSS_SELECTOR, "a#about_sidebar_link")
     BURGER_MENU_LOGOUT = (By.CSS_SELECTOR, "a#logout_sidebar_link")
     BURGER_MENU_RESET = (By.CSS_SELECTOR, "a#reset_sidebar_link")
+    ITEMS_CARDS = (By.CSS_SELECTOR, ".inventory_item")
     CART_LINK = (By.CSS_SELECTOR, "div#shopping_cart_container > a")
     CART_BADGE = (By.CSS_SELECTOR, ".shopping_cart_badge")
     DROPDOWN_SORTING = (By.CSS_SELECTOR, "div#header_container select")
