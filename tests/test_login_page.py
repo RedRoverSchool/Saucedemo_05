@@ -31,6 +31,20 @@ class TestLoginPage:
         assert len(inventor_items) == 6, "The number of items cards is not equal to 6"
 
     @allure.epic("Login Page Test")
+    @allure.story("US_001.00 | Login Page > Login (Login Locked Out User)")
+    def test_login_locked_out_user(self, browser):
+        login_page = LoginPage(browser, url=LOGIN_PAGE_URL)
+        login_page.open()
+        login_page.login_user(
+            username=users["locked_out_user"]["username"],
+            password=users["locked_out_user"]["password"],
+        )
+        assert (
+            login_page.get_alert_text()
+            == "Epic sadface: Sorry, this user has been locked out."
+        )
+
+    @allure.epic("Login Page Test")
     @allure.story(
         "TC_001.00.02 | Try to login unregistered user (incorrect login, correct pass)"
     )
@@ -48,7 +62,7 @@ class TestLoginPage:
         )
 
     @allure.epic("Login Page Test")
-    @allure.story("Try to navigate to inventory page while loged out")
+    @allure.story("Try to navigate to inventory page while logged out")
     def test_inventory_logout_user(self, browser):
         login_page = LoginPage(browser, url=LOGIN_PAGE_URL)
         login_page.open()
