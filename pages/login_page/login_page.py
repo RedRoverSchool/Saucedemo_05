@@ -7,7 +7,7 @@ class LoginPage(BasePage):
         super().__init__(browser, url=url)
         super().open()
 
-    def login_user(self, username='', password=''):
+    def login_user(self, username="", password=""):
         username_input = self.browser.find_element(*LoginPageLocators.INPUT_USER_NAME)
         username_input.click()
         username_input.clear()
