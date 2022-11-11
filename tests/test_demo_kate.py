@@ -37,3 +37,6 @@ class TestCheckout(BaseTest):
         # make sure cart is counting right sum of items every click
         count_item_3 = self.driver.find_element(By.CLASS_NAME, 'shopping_cart_badge').text
         assert '3' == count_item_3, 'not right amount'
+#jhbgjlkh.jnsz
+#skkjhkjhns
+#hhjhkjk;ll
