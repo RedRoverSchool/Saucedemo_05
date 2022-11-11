@@ -1,3 +1,5 @@
+from typing import Tuple
+
 from selenium.webdriver.common.by import By
 
 
@@ -14,3 +16,8 @@ class InventoryPageLocators:
     DROPDOWN_SORTING = (By.CSS_SELECTOR, "div#header_container select")
     PRODUCTS_CARDS = (By.CSS_SELECTOR, ".inventory_list > div")
     FOOTER_LINKS = (By.CSS_SELECTOR, "div#page_wrapper li")
+
+    ITEM_NAME = ".inventory_item_name"
+    ITEM_DESC = ".inventory_item_desc"
+    ITEM_PRICE = ".inventory_item_price"
+    ITEM_IMAGE = ".inventory_item_img a img"
