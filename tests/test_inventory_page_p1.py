@@ -11,19 +11,30 @@ sorting_price_cases = (
 )
 
 sorting_name_cases = (
-    ("Name (Z to A)", ('Test.allTheThings() T-Shirt (Red)',
-                       'Sauce Labs Onesie',
-                       'Sauce Labs Fleece Jacket',
-                       'Sauce Labs Bolt T-Shirt',
-                       'Sauce Labs Bike Light',
-                       'Sauce Labs Backpack')),
-    ("Name (A to Z)", ('Sauce Labs Backpack',
-                       'Sauce Labs Bike Light',
-                       'Sauce Labs Bolt T-Shirt',
-                       'Sauce Labs Fleece Jacket',
-                       'Sauce Labs Onesie',
-                       'Test.allTheThings() T-Shirt (Red)')),
+    (
+        "Name (Z to A)",
+        (
+            "Test.allTheThings() T-Shirt (Red)",
+            "Sauce Labs Onesie",
+            "Sauce Labs Fleece Jacket",
+            "Sauce Labs Bolt T-Shirt",
+            "Sauce Labs Bike Light",
+            "Sauce Labs Backpack",
+        ),
+    ),
+    (
+        "Name (A to Z)",
+        (
+            "Sauce Labs Backpack",
+            "Sauce Labs Bike Light",
+            "Sauce Labs Bolt T-Shirt",
+            "Sauce Labs Fleece Jacket",
+            "Sauce Labs Onesie",
+            "Test.allTheThings() T-Shirt (Red)",
+        ),
+    ),
 )
+
 
 class TestInventoryPage:
     @allure.epic("Inventory Page Test")
@@ -42,12 +53,14 @@ class TestInventoryPage:
             inventory_item_names_count == 6
             and inventory_item_descs_count == 6
             and inventory_item_img_lnk_count == 6
+            # and not page.check_js_errors()
+            # and not page.wait_page_loaded(check_images=True)
         ), "Some Items are not unique!"
 
     @allure.epic("Inventory Page Test")
     @allure.story("TC_002.00.02.01 | Test Inventory Page Sorting by price")
     @pytest.mark.parametrize("sorting, prices", sorting_price_cases)
-    def test_inventory_page_sorting_by_pice(self, browser, sorting, prices):
+    def test_inventory_page_sorting_by_price(self, browser, sorting, prices):
         page = InventoryPage(browser, url=LOGIN_PAGE_URL)
         page.open()
         page.login_standard_user()
