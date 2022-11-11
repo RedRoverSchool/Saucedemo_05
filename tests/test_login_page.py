@@ -20,7 +20,6 @@ failed_users_test_cases = (
 class TestLoginPage:
     @allure.epic("Login Page Test")
     @allure.story("US_001.00 | Login Page > Login")
-    @pytest.mark.smoke
     def test_login_registered_user(self, browser):
         """Login using registered user credentials."""
         login_page = LoginPage(browser, url=LOGIN_PAGE_URL)

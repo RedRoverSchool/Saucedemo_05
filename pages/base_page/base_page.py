@@ -8,6 +8,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.select import Select
+from selenium.webdriver.common.by import By
 
 
 class BasePage:
@@ -96,8 +97,8 @@ class BasePage:
         return element
 
     def select_dropdown_option(self, locator, option_text):
-        dropdown = self.browser.element_is_clickable(locator)
-        for option in dropdown.find_elements_by_tag_name("option"):
+        dropdown = self.element_is_clickable(locator)
+        for option in dropdown.find_elements(By.TAG_NAME, "option"):
             if option.text == option_text:
                 option.click()
                 break
