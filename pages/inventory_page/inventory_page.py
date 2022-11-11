@@ -25,7 +25,7 @@ class InventoryPage(LoginPage, BasePage):
         return self.elements_are_present(InventoryPageLocators.ITEMS_CARDS)
 
     def extract_item_name(self, element: WebElement) -> str:
-        return element.find_element(By.CSS_SELECTOR, ".inventory_item_name").text
+        return element.find_element(By.CSS_SELECTOR, InventoryPageLocators.ITEM_NAME).text
 
     def extract_items_names(self, we_list: List[WebElement]) -> List:
         names = []
@@ -34,7 +34,7 @@ class InventoryPage(LoginPage, BasePage):
         return names
 
     def extract_item_desc(self, element: WebElement) -> str:
-        return element.find_element(By.CSS_SELECTOR, ".inventory_item_desc").text
+        return element.find_element(By.CSS_SELECTOR, InventoryPageLocators.ITEM_DESC).text
 
     def extract_items_descs(self, we_list: List[WebElement]) -> List:
         descs = []
@@ -43,7 +43,7 @@ class InventoryPage(LoginPage, BasePage):
         return descs
 
     def extract_item_price(self, element: WebElement) -> str:
-        return element.find_element(By.CSS_SELECTOR, ".inventory_item_price").text
+        return element.find_element(By.CSS_SELECTOR, InventoryPageLocators.ITEM_PRICE).text
 
     def extract_items_prices(self, we_list: List[WebElement]) -> List:
         prices = []
@@ -52,9 +52,7 @@ class InventoryPage(LoginPage, BasePage):
         return prices
 
     def extract_item_img_link(self, element: WebElement) -> str:
-        return element.find_element(
-            By.CSS_SELECTOR, ".inventory_item_img a img"
-        ).get_property("src")
+        return element.find_element(By.CSS_SELECTOR, InventoryPageLocators.ITEM_IMAGE).get_property("src")
 
     def extract_items_links(self, we_list: List[WebElement]) -> List:
         links = []
