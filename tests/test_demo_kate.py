@@ -39,4 +39,5 @@ class TestCheckout(BaseTest):
         assert '3' == count_item_3, 'not right amount'
 #jhbgjlkh.jnsz
 #skkjhkjhns
-#hhjhkjk;ll
+#hhjhkjk;lljncjknjbnjknb
+#kmkjknjkjnjknhjklcd
