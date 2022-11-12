@@ -1,11 +1,10 @@
-import time
-
 import pytest
 import allure
 from pages.inventory_page.inventory_page import InventoryPage
 
 LOGIN_PAGE_URL = "https://www.saucedemo.com/"
 INVENTORY_URL = "https://www.saucedemo.com/inventory.html"
+ITEMS_COUNTER = 6
 
 sorting_price_cases = ("Price (low to high)", "Price (high to low)")
 
@@ -26,9 +25,9 @@ class TestInventoryPage:
             set(page.extract_items_links(inventory_items))
         )
         assert (
-            inventory_item_names_count == 6
-            and inventory_item_descs_count == 6
-            and inventory_item_img_lnk_count == 6
+            inventory_item_names_count == ITEMS_COUNTER
+            and inventory_item_descs_count == ITEMS_COUNTER
+            and inventory_item_img_lnk_count == ITEMS_COUNTER
             # and not page.check_js_errors()
             # and not page.wait_page_loaded(check_images=True)
         ), "Some Items are not unique!"
@@ -62,3 +61,20 @@ class TestInventoryPage:
             names_list, reverse=True if sorting == "Name (Z to A)" else False
         )
         assert expected_list == names_list, "Sorting by name works incorrect"
+
+    @allure.epic("Inventory Page Test")
+    @allure.story(
+        "TC_002.01.01 | Add to Cart from inventory Page > button text changed"
+    )
+    def test_add_item_to_cart(self, browser):
+        page = InventoryPage(browser, url=LOGIN_PAGE_URL)
+        page.open()
+        page.login_standard_user()
+        page.reset_page_state()
+        inventory_items = page.find_items_cards()
+        items_in_cart = page.get_cart_counter()
+        for item in inventory_items:
+            button_text = page.click_item_cart_button(item)
+            items_in_cart += 1
+            assert button_text == "REMOVE"
+            assert items_in_cart == page.get_cart_counter()

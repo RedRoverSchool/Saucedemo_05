@@ -7,6 +7,7 @@ from pages.inventory_page.inventory_page import InventoryPage
 
 LOGIN_PAGE_URL = "https://www.saucedemo.com/"
 INVENTORY_URL = "https://www.saucedemo.com/inventory.html"
+ITEMS_COUNTER = 6
 
 failed_users_test_cases = (
     ("locked_out_user", "Epic sadface: Sorry, this user has been locked out."),
@@ -31,11 +32,11 @@ class TestLoginPage:
         # print(f"Navigated to {login_page.get_current_url()}")
         inventory_page = InventoryPage(browser, url=INVENTORY_URL)
         inventor_items = inventory_page.find_items_cards()
-        inventory_page.open_burger_menu()
-        time.sleep(1)
-        inventory_page.click_logout_from_burger_menu()
+        inventory_page.do_logout()
         # print(f"Navigated to {inventory_page.get_current_url()}")
-        assert len(inventor_items) == 6, "The number of items cards is not equal to 6"
+        assert (
+            len(inventor_items) == ITEMS_COUNTER
+        ), f"The number of items cards is not equal to {ITEMS_COUNTER}"
 
     @allure.epic("Login Page Test")
     @allure.story("TC_001.00.02 | Try to login unregistered/locked out user")
