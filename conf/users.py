@@ -7,4 +7,6 @@ users = {
         "password": "secret_sauce",
     },
     "unregistered_user": {"username": "unregistered_user", "password": "secret_sauce"},
+    "empty_username_user": {"username": "", "password": "secret_sauce"},
+    "empty_password_user": {"username": "standard_user", "password": ""},
 }

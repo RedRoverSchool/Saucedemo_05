@@ -21,6 +21,16 @@ class InventoryPage(LoginPage, BasePage):
     def click_logout_from_burger_menu(self):
         self.click_button(InventoryPageLocators.BURGER_MENU_LOGOUT)
 
+    def do_logout(self):
+        self.click_button(InventoryPageLocators.BTN_BURGER_MENU)
+        self.click_logout_from_burger_menu()
+
+    def reset_page_state(self):
+        self.open_burger_menu()
+        self.click_button(InventoryPageLocators.BURGER_MENU_RESET)
+        self.close_burger_menu()
+        self.refresh_page()
+
     def find_items_cards(self):
         return self.elements_are_present(InventoryPageLocators.ITEMS_CARDS)
 
@@ -54,7 +64,7 @@ class InventoryPage(LoginPage, BasePage):
     def extract_items_prices(self, we_list: List[WebElement]) -> List:
         prices = []
         for item in we_list:
-            prices.append(self.extract_item_price(item))
+            prices.append(float(self.extract_item_price(item).strip("$")))
         return prices
 
     def extract_item_img_link(self, element: WebElement) -> str:
@@ -70,3 +80,16 @@ class InventoryPage(LoginPage, BasePage):
 
     def set_sorting_order(self, sorting: str):
         self.select_dropdown_option(InventoryPageLocators.DROPDOWN_SORTING, sorting)
+
+    def click_item_cart_button(self, element: WebElement) -> str:
+        element.find_element(By.CSS_SELECTOR, InventoryPageLocators.ITEM_BUTTON).click()
+        return element.find_element(
+            By.CSS_SELECTOR, InventoryPageLocators.ITEM_BUTTON
+        ).text
+
+    def get_cart_counter(self) -> int:
+        try:
+            cnt = self.element_is_present(InventoryPageLocators.CART_BADGE)
+            return int(cnt.text)
+        except:
+            return 0
