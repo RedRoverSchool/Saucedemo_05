@@ -14,6 +14,7 @@ class TestDetailedPage:
         page.open_first_item()
         page.click_add_to_cart()
 
-        assert(
-            page.element_is_not_visible(DetailedPageLocators.ADD_TO_CART_BUTTON), 'there is add button'
+        assert (
+            page.element_is_not_visible(DetailedPageLocators.ADD_TO_CART_BUTTON),
+            "there is add button",
         )
