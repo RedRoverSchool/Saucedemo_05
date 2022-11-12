@@ -15,6 +15,8 @@ failed_users_test_cases = (
         "unregistered_user",
         "Epic sadface: Username and password do not match any user in this service",
     ),
+    ("empty_username_user", "Epic sadface: Username is required"),
+    ("empty_password_user", "Epic sadface: Password is required"),
 )
 
 
@@ -36,7 +38,7 @@ class TestLoginPage:
     @allure.epic("Login Page Test")
     @allure.story("TC_001.00.02 | Try to login unregistered/locked out user")
     @pytest.mark.parametrize("user, msg", failed_users_test_cases)
-    def test_login_locked_out_user(self, browser, user, msg):
+    def test_unsuccessful_login(self, browser, user, msg):
         login_page = LoginPage(browser, url=LOGIN_PAGE_URL)
         login_page.open()
         login_page.login_user(
