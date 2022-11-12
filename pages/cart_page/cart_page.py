@@ -5,5 +5,6 @@ from pages.cart_page.cart_page_locators import CartPageLocators
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
+
 class CartPage(InventoryPage, LoginPage, BasePage):
     pass
