@@ -25,15 +25,10 @@ class TestLoginPage:
         """Login using registered user credentials."""
         login_page = LoginPage(browser, url=LOGIN_PAGE_URL)
         login_page.open()
-        login_page.login_user(
-            username=users["standard_user"]["username"],
-            password=users["standard_user"]["password"],
-        )
-        # print(f"Navigated to {login_page.get_current_url()}")
+        login_page.login_standard_user()
         inventory_page = InventoryPage(browser, url=INVENTORY_URL)
         inventor_items = inventory_page.find_items_cards()
         inventory_page.do_logout()
-        # print(f"Navigated to {inventory_page.get_current_url()}")
         assert (
             len(inventor_items) == ITEMS_COUNTER
         ), f"The number of items cards is not equal to {ITEMS_COUNTER}"

@@ -7,7 +7,6 @@ INVENTORY_URL = "https://www.saucedemo.com/inventory.html"
 ITEMS_COUNTER = 6
 
 sorting_price_cases = ("Price (low to high)", "Price (high to low)")
-
 sorting_name_cases = ("Name (Z to A)", "Name (A to Z)")
 
 
