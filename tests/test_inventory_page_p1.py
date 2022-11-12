@@ -18,6 +18,9 @@ class TestInventoryPage:
         page = InventoryPage(browser, url=LOGIN_PAGE_URL)
         page.open()
         page.login_standard_user()
+        page.wait_page_loaded(check_images=True)
+        if page.check_js_errors():
+            raise Exception
         inventory_items = page.find_items_cards()
         inventory_item_names_count = len(set(page.extract_items_names(inventory_items)))
         inventory_item_descs_count = len(set(page.extract_items_descs(inventory_items)))
@@ -28,8 +31,6 @@ class TestInventoryPage:
             inventory_item_names_count == ITEMS_COUNTER
             and inventory_item_descs_count == ITEMS_COUNTER
             and inventory_item_img_lnk_count == ITEMS_COUNTER
-            # and not page.check_js_errors()
-            # and not page.wait_page_loaded(check_images=True)
         ), "Some Items are not unique!"
 
     @allure.epic("Inventory Page Test")
