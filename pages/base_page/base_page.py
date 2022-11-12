@@ -249,7 +249,7 @@ class BasePage:
             time.sleep(sleep_time)
         source = ""
         try:
-            source = self.browser.page_source
+            source = self.get_page_source()
         except:
             pass
         # Wait until page loaded (and scroll it, to make sure all objects will be loaded):
@@ -269,7 +269,7 @@ class BasePage:
                 # Check if the page source was changed
                 new_source = ""
                 try:
-                    new_source = self.browser.page_source
+                    new_source = self.get_page_source()
                 except Exception as ex:
                     print(repr(ex))
                 page_loaded = new_source == source
