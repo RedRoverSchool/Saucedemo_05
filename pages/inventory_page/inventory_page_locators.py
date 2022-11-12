@@ -12,7 +12,7 @@ class InventoryPageLocators:
     BURGER_MENU_RESET = (By.CSS_SELECTOR, "a#reset_sidebar_link")
     ITEMS_CARDS = (By.CSS_SELECTOR, "div.inventory_item")
     CART_LINK = (By.CSS_SELECTOR, "div#shopping_cart_container > a")
-    CART_BADGE = (By.CSS_SELECTOR, "span.shopping_cart_badge")
+    CART_BADGE = (By.CSS_SELECTOR, ".shopping_cart_badge")
     CART_COUNTER = (By.CSS_SELECTOR, "div#shopping_cart_container span")
     DROPDOWN_SORTING = (By.CSS_SELECTOR, "div#header_container select")
     PRODUCTS_CARDS = (By.CSS_SELECTOR, ".inventory_list > div")
