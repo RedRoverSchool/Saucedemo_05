@@ -1,6 +1,6 @@
 import time
+import random
 from typing import List
-
 from selenium.common import TimeoutException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome.webdriver import WebDriver
@@ -57,20 +57,15 @@ class BasePage:
         button = self.element_is_clickable(locator)
         button.click()
 
-    def random_wait(self, t_min, t_max):
-        import time
-        import random
-
+    def random_wait(self, t_min: int, t_max: int):
         random_time = random.randrange(t_min, t_max)
         time.sleep(random_time)
 
     def pick_random_list_item(self, we_list: List[WebElement]) -> WebElement:
-        import random
-
         random_index = random.randint(0, len(we_list) - 1)
         return we_list[random_index]
 
-    def highlight_web_element(self, locator) -> None:
+    def highlight_web_element(self, locator):
         element = self.element_is_visible(locator)
         self.browser.execute_script(
             "arguments[0].style.border='3px solid red'", element
@@ -91,12 +86,12 @@ class BasePage:
         ActionChains(self.browser).click_and_hold(on_element=element)
         return element
 
-    def move_to_element(self, locator):
+    def move_to_element(self, locator) -> WebElement:
         element = self.element_is_visible(locator)
         ActionChains(self.browser).move_to_element(element).perform()
         return element
 
-    def select_dropdown_option(self, locator, option_text):
+    def select_dropdown_option(self, locator, option_text: str):
         dropdown = self.element_is_clickable(locator)
         for option in dropdown.find_elements(By.TAG_NAME, "option"):
             if option.text == option_text:
@@ -112,18 +107,18 @@ class BasePage:
     def forward(self):
         self.browser.forward()
 
-    def wait(self, seconds):
+    def wait(self, seconds: int):
         self.browser.implicitly_wait(seconds)
 
     def get_element_text(self, locator):
         element = self.browser.find_element(locator)
         return element.text
 
-    def get_attribute(self, locator, name):
+    def get_attribute(self, locator, name: str):
         element = self.browser.find_element(locator)
         return element.get_attribute(name)
 
-    def select_by_index(self, locator, index):
+    def select_by_index(self, locator, index: int):
         element = self.browser.find_element(locator)
         Select(element).select_by_index(index)
 
@@ -131,11 +126,11 @@ class BasePage:
         element = self.browser.find_element(locator)
         Select(element).select_by_value(value)
 
-    def select_by_text(self, locator, text):
+    def select_by_text(self, locator, text: str):
         element = self.browser.find_element(locator)
         Select(element).select_by_value(text)
 
-    def is_text_in_element(self, locator, text):
+    def is_text_in_element(self, locator, text: str):
         try:
             result = self.wait.until(EC.text_to_be_present_in_element(locator, text))
         except TimeoutException:
@@ -234,13 +229,13 @@ class BasePage:
 
     def wait_page_loaded(
         self,
-        timeout=60,
-        check_js_complete=True,
-        check_page_changes=False,
-        check_images=False,
+        timeout: int = 60,
+        check_js_complete: bool = True,
+        check_page_changes: bool = False,
+        check_images: bool = False,
         wait_for_element=None,
         wait_for_element_to_disappear=None,
-        sleep_time=0,
+        sleep_time: int = 0,
     ):
         page_loaded = False
         double_check = False
