@@ -10,4 +10,3 @@ class CartPageLocators:
 
     BTN_CHECKOUT = (By.CLASS_NAME, "checkout_button")
     BTN_CONT_SHOP = (By.ID, "continue-shopping")
-
