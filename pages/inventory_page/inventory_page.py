@@ -89,7 +89,9 @@ class InventoryPage(LoginPage, BasePage):
 
     def get_cart_counter(self) -> int:
         try:
-            cnt = self.element_is_present(InventoryPageLocators.CART_BADGE)
-            return int(cnt.text)
+            cart_items_counter = self.element_is_present(
+                InventoryPageLocators.CART_BADGE
+            )
+            return int(cart_items_counter.text)
         except:
             return 0
