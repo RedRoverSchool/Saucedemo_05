@@ -34,7 +34,6 @@ class ProductPageLocators:
     INVENTORY_ITEM_DESC = (By.CSS_SELECTOR, ".inventory_item_desc")
     INVENTORY_ITEM_PRICE = (By.CSS_SELECTOR, ".inventory_item_price")
     INVENTORY_ITEM_LINK = (By.CSS_SELECTOR, ".inventory_item_img .inventory_item_img")
-
     SAUCE_LABS_BACKPACK_ADD_TO_CART = (
         By.CSS_SELECTOR,
         "#add-to-cart-sauce-labs-backpack",
