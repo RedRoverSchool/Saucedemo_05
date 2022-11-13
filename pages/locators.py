@@ -38,4 +38,6 @@ class ProductPageLocators:
     SAUCE_LABS_BACKPACK_ADD_TO_CART = (By.CSS_SELECTOR, "#add-to-cart-sauce-labs-backpack")
     SAUCE_LABS_BACKPACK_REMOVE_FROM_CART = (By.CSS_SELECTOR, "#remove-sauce-labs-backpack")
     SHOPPING_CART_LINK = (By.CSS_SELECTOR, ".shopping_cart_link")
+    SORT_DROPDOWN = (By.CLASS_NAME, "select_container")
+    PRICE_LOW_TO_HIGH = (By.CSS_SELECTOR, "[value='lohi']")
 

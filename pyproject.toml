@@ -13,7 +13,7 @@ webdriver-manager = "^3.8.4"
 black = "^22.10.0"
 flake8 = "^5.0.4"
 pytest-html = "^3.2.0"
-#allure = "^2.20.1"
+allure-pytest = "^2.11.1"
 
 
 [build-system]

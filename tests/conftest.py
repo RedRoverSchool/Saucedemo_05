@@ -14,18 +14,14 @@ def d(browser):
         options = webdriver.ChromeOptions()
         options.headless = conf.BROWSER_HEADLESS
         driver = webdriver.Chrome(
-            service=ChromeService(
-                ChromeDriverManager().install()
-            ), options=options
+            service=ChromeService(ChromeDriverManager().install()), options=options
         )
 
     elif browser == "firefox":
         options = webdriver.FirefoxOptions()
         options.headless = conf.BROWSER_HEADLESS
         driver = webdriver.Firefox(
-            service=FirefoxService(
-                GeckoDriverManager().install()
-            ), options=options
+            service=FirefoxService(GeckoDriverManager().install()), options=options
         )
 
     return driver
