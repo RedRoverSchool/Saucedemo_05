@@ -40,4 +40,3 @@ class ProductPageLocators:
     SHOPPING_CART_LINK = (By.CSS_SELECTOR, ".shopping_cart_link")
     SORT_DROPDOWN = (By.CLASS_NAME, "select_container")
     PRICE_LOW_TO_HIGH = (By.CSS_SELECTOR, "[value='lohi']")
-
