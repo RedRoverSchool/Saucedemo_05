@@ -4,13 +4,28 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
-options = Options()
-options.add_argument("start-maximized")
+
+@pytest.fixture(scope='class')
+def set_chrome_options():
+    options = Options()
+    # options.add_argument("--headless")
+    # options.add_argument("--no-sandbox")
+    # options.add_argument("--disable-dev-shm-usage")
+    # options.add_argument("--disable-notifications")
+    # options.add_argument("--disable-setuid-sandbox")
+    return options
 
 
-@pytest.fixture(scope="class")
-def driver_init(request):
-    chrome_driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-    request.cls.driver = chrome_driver
+@pytest.fixture()
+def driver(set_chrome_options):
+    options = set_chrome_options
+    driver = webdriver.Chrome(
+        service=Service(ChromeDriverManager().install()), options=options
+    )
+    return driver
+
+@pytest.fixture(autouse=True)
+def c(driver):
+    driver.get('https://www.saucedemo.com/')
     yield
-    chrome_driver.quit()
+    driver.quit()
