@@ -1,48 +1,47 @@
-from selenium.webdriver.common.by import By
-from selenium import webdriver
 import conf
+from pages.locators import LoginPageLocators
+from pages.locators import ProductPageLocators
 
 
-url = "https://www.saucedemo.com/"
+class TestAddToCart:
+    def test_add_to_cart(self, d):
 
+        assert d.current_url == conf.URL
 
-def test_add_to_cart(browser: webdriver.Chrome):
-    browser.get(url)
-    assert browser.current_url == conf.URL
+        # login
+        d.find_element(*LoginPageLocators.LOGIN_FORM).send_keys(
+            "standard_user"
+        )
+        d.find_element(*LoginPageLocators.PASSWORD_FORM).send_keys(
+            "secret_sauce"
+        )
+        d.find_element(*LoginPageLocators.LOGIN_BUTTON).click()
+        assert d.current_url == "https://www.saucedemo.com/inventory.html"
 
-    # login
-    browser.find_element(By.XPATH, "//input[@id='user-name']").send_keys(
-        "standard_user"
-    )
+        add_to_cart_button = d.find_element(
+            *ProductPageLocators.SAUCE_LABS_BACKPACK_ADD_TO_CART
+        ).text
 
-    browser.find_element(By.XPATH, "//input[@id='password']").send_keys("secret_sauce")
+        assert add_to_cart_button == "ADD TO CART"
+        d.find_element(
+            *ProductPageLocators.SAUCE_LABS_BACKPACK_ADD_TO_CART
+        ).click()
 
-    browser.find_element(By.XPATH, "//input[@id='login-button']").click()
-    assert browser.current_url == "https://www.saucedemo.com/inventory.html"
+        shopping_cart = d.find_element(
+            *ProductPageLocators.SHOPPING_CART_LINK
+        ).text
+        assert shopping_cart == "1"
 
-    add_to_cart_button = browser.find_element(
-        By.CSS_SELECTOR, "#add-to-cart-sauce-labs-backpack"
-    ).text
+        remove_from_cart_button = d.find_element(
+            *ProductPageLocators.SAUCE_LABS_BACKPACK_REMOVE_FROM_CART
+        ).text
+        assert remove_from_cart_button == "REMOVE"
 
-    assert add_to_cart_button == "ADD TO CART"
-    browser.find_element(By.CSS_SELECTOR, "#add-to-cart-sauce-labs-backpack").click()
+        d.find_element(
+            *ProductPageLocators.SAUCE_LABS_BACKPACK_REMOVE_FROM_CART
+        ).click()
 
-    shopping_cart = browser.find_element(By.CSS_SELECTOR, ".shopping_cart_link").text
-    assert shopping_cart == "1"
-
-    remove_from_cart_button = browser.find_element(
-        By.CSS_SELECTOR, "#remove-sauce-labs-backpack"
-    ).text
-    assert remove_from_cart_button == "REMOVE"
-
-    browser.find_element(By.CSS_SELECTOR, "#remove-sauce-labs-backpack").click()
-
-    shopping_cart = browser.find_element(By.CSS_SELECTOR, ".shopping_cart_link").text
-    assert shopping_cart == ""
-
-    browser.quit()
-
-
-if __name__ == "__main__":
-    browser = init_browser()
-    test_add_to_cart(browser)
+        shopping_cart = d.find_element(
+            *ProductPageLocators.SHOPPING_CART_LINK
+        ).text
+        assert shopping_cart == ""

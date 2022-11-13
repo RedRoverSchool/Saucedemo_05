@@ -1,25 +1,14 @@
 from selenium.webdriver.common.by import By
-from pprint import pprint
 import conf
 from pages.locators import LoginPageLocators
-from pages.locators import BurgerMenuLocators
 from pages.locators import ProductPageLocators
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
-
+# from pprint import pprint
 
 
 class TestProductPage:
-    # def browser():
-    #     browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-    #     browser.maximize_window()
-    #     return browser
-
-
     def test_get_all_product(self, d):
 
         assert d.current_url == conf.URL
-
         # login
         d.find_element(*LoginPageLocators.LOGIN_FORM).send_keys(
             "standard_user"
@@ -27,7 +16,6 @@ class TestProductPage:
         d.find_element(*LoginPageLocators.PASSWORD_FORM).send_keys(
             "secret_sauce"
         )
-
         d.find_element(*LoginPageLocators.LOGIN_BUTTON).click()
         assert d.current_url == "https://www.saucedemo.com/inventory.html"
 
@@ -55,7 +43,6 @@ class TestProductPage:
             )
 
         return list_inventory
-
 
     def test_sort_price_low_to_high(self, d):
 
@@ -91,11 +78,9 @@ class TestProductPage:
         d.quit()
         return price_low_to_high
 
-
-    if __name__ == "__main__":
-        br = d()
-        product = get_all_product(br)
-        pprint(product)
-
-        price_sorted = sort_price_low_to_high(br)
-        print(f"price_low_to_high: {price_sorted}")
+    # if __name__ == "__main__":
+    #     product = test_get_all_product(d)
+    #     pprint(product)
+    #
+    #     price_sorted = test_sort_price_low_to_high(d)
+    #     print(f"price_low_to_high: {price_sorted}")
