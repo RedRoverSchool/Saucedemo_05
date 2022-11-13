@@ -28,32 +28,59 @@ jobs:
           use-isort: false
           extra-pylint-options: ""
           extra-pycodestyle-options: ""
-          extra-flake8-options: "--count --benchmark --ignore=E501"
+          extra-flake8-options: "--count --benchmark --ignore=E501,F401"
           extra-black-options: ". -S"
           extra-mypy-options: ""
           extra-isort-options: ""
       - name: Update repo
         run: sudo apt-get update
-      - name: Install software
-        run: sudo apt-get install -y chromium-browser firefox
+      #----------------------------------------------
+      #  -----  install browsers  -----
+      #----------------------------------------------
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@latest
+      - name: Install Firefox
+        uses: riccione/setup_firefox@v1
       - name: Check Chromium version
         run: chromium-browser --version
-      - name: Check Firefox version
-        run: firefox --version
-      - name: Install poetry
-        run: curl -sSL https://install.python-poetry.org | python3 -
+
+      #----------------------------------------------
+      #  -----  install & configure poetry  -----
+      #----------------------------------------------
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
+
+      #----------------------------------------------
+      #       load cached venv if cache exists
+      #----------------------------------------------
       - name: Load cached venv
         id: cached-poetry-dependencies
         uses: actions/cache@v3
         with:
-          path: deployer/.venv
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}-${{ hashFiles('.github/workflows/pr-deployer.yml') }}
+          path: .venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+      #----------------------------------------------
+      # install dependencies if cache does not exist
+      #----------------------------------------------
       - name: Install dependencies
-        run: poetry install
-      - name: Run pytest
-        run: poetry run pytest
-      - name: Run the pytest and generate junit xml report
-        run: poetry run pytest --junitxml report.xml
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: poetry install --no-interaction --no-root
+      #----------------------------------------------
+      # install your root project, if required
+      #----------------------------------------------
+      - name: Install project
+        run: poetry install --no-interaction
+      #----------------------------------------------
+      #              run test suite
+      #----------------------------------------------
+      - name: Run tests
+        run: |
+          source .venv/bin/activate
+          pytest tests/ --junitxml report.xml
       - name: Create test summary
         uses: test-summary/action@v2.0
         with:
@@ -64,3 +91,11 @@ jobs:
         if: always()
         with:
           junit_files: "report.xml"
+      #----------------------------------------------
+      #              save report for download
+      #----------------------------------------------
+      - name: Upload report using artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: report
+          path: /home/runner/work/Saucedemo_05/Saucedemo_05/report/

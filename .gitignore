@@ -1,2 +1,4 @@
-__pycache__
+*pycache*
 *.log
+*.idea
+allure.bat
