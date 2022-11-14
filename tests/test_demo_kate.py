@@ -1,11 +1,13 @@
 from selenium.webdriver.common.by import By
+import allure
 
 user_name = 'standard_user'
 password = 'secret_sauce'
 
 
 class TestSample:
-
+    @allure.epic('Login')
+    @allure.story('sj')
     def test_url(self, driver):
         # login as an authorized user
         driver.find_element(By.ID, 'user-name').send_keys(user_name)
