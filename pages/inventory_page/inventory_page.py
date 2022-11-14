@@ -91,5 +91,5 @@ class InventoryPage(LoginPage, BasePage):
         try:
             cnt = self.element_is_present(InventoryPageLocators.CART_BADGE)
             return int(cnt.text)
-        except:
+        except Exception:
             return 0
