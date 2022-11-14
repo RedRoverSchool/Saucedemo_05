@@ -1,10 +1,9 @@
 import pytest
 import allure
 from pages.inventory_page.inventory_page import InventoryPage
+from pages.login_page.login_page import LoginPage
+from conf.website_config import WebSiteConfig
 
-LOGIN_PAGE_URL = "https://www.saucedemo.com/"
-INVENTORY_URL = "https://www.saucedemo.com/inventory.html"
-ITEMS_COUNTER = 6
 
 sorting_price_cases = ("Price (low to high)", "Price (high to low)")
 sorting_name_cases = ("Name (Z to A)", "Name (A to Z)")
@@ -14,9 +13,10 @@ class TestInventoryPage:
     @allure.epic("Inventory Page Test")
     @allure.story("TC_002.00.01 | Test Inventory Page content")
     def test_inventory_page_content(self, browser):
-        page = InventoryPage(browser, url=LOGIN_PAGE_URL)
+        page = LoginPage(browser)
         page.open()
         page.login_standard_user()
+        page = InventoryPage(browser)
         page.wait_page_loaded(check_images=True)
         if page.check_js_errors():
             raise Exception
@@ -27,18 +27,19 @@ class TestInventoryPage:
             set(page.extract_items_links(inventory_items))
         )
         assert (
-            inventory_item_names_count == ITEMS_COUNTER
-            and inventory_item_descs_count == ITEMS_COUNTER
-            and inventory_item_img_lnk_count == ITEMS_COUNTER
+            inventory_item_names_count == WebSiteConfig.ITEMS_COUNTER
+            and inventory_item_descs_count == WebSiteConfig.ITEMS_COUNTER
+            and inventory_item_img_lnk_count == WebSiteConfig.ITEMS_COUNTER
         ), "Some Items are not unique!"
 
     @allure.epic("Inventory Page Test")
     @allure.story("TC_002.00.02.01 | Test Inventory Page Sorting by price")
     @pytest.mark.parametrize("sorting", sorting_price_cases)
     def test_inventory_page_sorting_by_price(self, browser, sorting):
-        page = InventoryPage(browser, url=LOGIN_PAGE_URL)
+        page = LoginPage(browser)
         page.open()
         page.login_standard_user()
+        page = InventoryPage(browser)
         page.set_sorting_order(sorting)
         inventory_items = page.find_items_cards()
         prices_list = page.extract_items_prices(inventory_items)
@@ -51,9 +52,10 @@ class TestInventoryPage:
     @allure.story("TC_002.00.02.02 | Test Inventory Page Sorting by name")
     @pytest.mark.parametrize("sorting", sorting_name_cases)
     def test_inventory_page_sorting_by_name(self, browser, sorting):
-        page = InventoryPage(browser, url=LOGIN_PAGE_URL)
+        page = LoginPage(browser)
         page.open()
         page.login_standard_user()
+        page = InventoryPage(browser)
         page.set_sorting_order(sorting)
         inventory_items = page.find_items_cards()
         names_list = page.extract_items_names(inventory_items)
@@ -67,9 +69,10 @@ class TestInventoryPage:
         "TC_002.01.01 | Add to Cart from inventory Page > button text changed"
     )
     def test_add_item_to_cart(self, browser):
-        page = InventoryPage(browser, url=LOGIN_PAGE_URL)
+        page = LoginPage(browser)
         page.open()
         page.login_standard_user()
+        page = InventoryPage(browser)
         page.reset_page_state()
         inventory_items = page.find_items_cards()
         items_in_cart = page.get_cart_counter()

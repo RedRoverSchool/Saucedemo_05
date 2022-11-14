@@ -1,9 +1,16 @@
 from pages.base_page.base_page import BasePage
 from pages.login_page.login_page_locators import LoginPageLocators
 from conf.users import users
+from conf.website_config import WebSiteConfig
+from selenium.webdriver.chrome.webdriver import WebDriver
 
 
 class LoginPage(BasePage):
+    def __init__(self, browser: WebDriver):
+        self.browser = browser
+        self.url = WebSiteConfig.LOGIN_PAGE_URL
+        super().__init__(browser=self.browser, url=self.url)
+
     def login_user(self, username="", password=""):
         # self.highlight_web_element(LoginPageLocators.INPUT_USER_NAME)
         self.send_keys_to_input(LoginPageLocators.INPUT_USER_NAME, username)

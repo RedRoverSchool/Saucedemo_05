@@ -1,13 +1,22 @@
 from typing import List
 
 from pages.base_page.base_page import BasePage
-from pages.login_page.login_page import LoginPage
 from pages.inventory_page.inventory_page_locators import InventoryPageLocators
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
+from conf.website_config import WebSiteConfig
+from selenium.webdriver.chrome.webdriver import WebDriver
 
 
-class InventoryPage(LoginPage, BasePage):
+class InventoryPage(BasePage):
+    def __init__(self, browser: WebDriver):
+        self.browser = browser
+        self.url = WebSiteConfig.INVENTORY_PAGE_URL
+        super().__init__(browser=self.browser, url=self.url)
+
+    def navigate_to_inventory_page(self):
+        self.navigate_to(url=WebSiteConfig.INVENTORY_PAGE_URL)
+
     def open_burger_menu(self):
         self.click_button(InventoryPageLocators.BTN_BURGER_MENU)
 
