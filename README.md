@@ -1,5 +1,5 @@
-# Saucedemo_05
-
+<a name="readme-top"></a>
+# Saucedemo_05 [![GitHub Actions saucedemo](https://github.com/demmi/Saucedemo_05/actions/workflows/action.yml/badge.svg)](https://github.com/demmi/Saucedemo_05/actions/workflows/action.yml)
 ### Links
 
 target: https://www.saucedemo.com/

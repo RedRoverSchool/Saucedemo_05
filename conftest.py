@@ -14,6 +14,7 @@ from conf.browser_config import browser_config
 
 @pytest.fixture
 def set_chrome_options():
+    headless = browser_config["headless"]
     proxy_server = browser_config["proxy_server"]
     user_agent = browser_config["user_agent"]
 
@@ -30,7 +31,11 @@ def set_chrome_options():
     options.add_argument("--disable-setuid-sandbox")
     options.add_argument("--disable-blink-features=AutomationControlled")
     options.add_experimental_option("useAutomationExtension", False)
-    options.add_argument("--headless")
+    if headless:
+        options.add_argument("--headless")
+        options.add_experimental_option(
+            "prefs", {"profile.managed_default_content_settings.images": 2}
+        )
     options.add_experimental_option(
             "prefs", {"profile.managed_default_content_settings.images": 2}
         )
