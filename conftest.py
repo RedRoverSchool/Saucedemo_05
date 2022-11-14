@@ -37,8 +37,8 @@ def set_chrome_options():
             "prefs", {"profile.managed_default_content_settings.images": 2}
         )
     options.add_experimental_option(
-            "prefs", {"profile.managed_default_content_settings.images": 2}
-        )
+        "prefs", {"profile.managed_default_content_settings.images": 2}
+    )
     if proxy_server:
         options.add_argument(f"--proxy-server={proxy_server}")
     if user_agent:
