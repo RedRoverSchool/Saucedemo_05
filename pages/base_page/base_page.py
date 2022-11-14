@@ -210,7 +210,7 @@ class BasePage:
         source = ""
         try:
             source = self.browser.page_source
-        except:
+        except Exception:
             return None
         return source
 
@@ -245,7 +245,7 @@ class BasePage:
         source = ""
         try:
             source = self.get_page_source()
-        except:
+        except Exception:
             pass
         # Wait until page loaded (and scroll it, to make sure all objects will be loaded):
         while not page_loaded:
