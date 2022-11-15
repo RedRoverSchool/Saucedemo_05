@@ -6,8 +6,9 @@ password = 'secret_sauce'
 
 
 class TestSample:
-    @allure.epic('Login')
-    @allure.story('sj')
+    @allure.epic('Login test')
+    @allure.story('ent')
+    @allure.suite('regression')
     def test_url(self, driver):
         # login as an authorized user
         driver.find_element(By.ID, 'user-name').send_keys(user_name)
