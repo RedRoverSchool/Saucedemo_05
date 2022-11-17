@@ -9,10 +9,8 @@ CART_URL = "https://www.saucedemo.com/cart.html"
 
 
 class TestCartEdit:
-
     @allure.epic("Cart Page Test")
-    @allure.story(
-        "TC_004.00 Cart | URL")
+    @allure.story("TC_004.00 Cart | URL")
     def test_cart_url(self, browser):
         page = InventoryPage(browser, url=LOGIN_PAGE_URL)
         page.open()
@@ -23,7 +21,8 @@ class TestCartEdit:
     @allure.epic("Cart Page Test")
     @allure.story(
         "TC_004.00.__ Cart | Edit Cart Items"
-        "Add to Cart from inventory Page > Go To Cart > Dell")
+        "Add to Cart from inventory Page > Go To Cart > Dell"
+    )
     def test_cart_del_items_all(self, browser):
         page = InventoryPage(browser, url=LOGIN_PAGE_URL)
         page.open()
@@ -36,14 +35,15 @@ class TestCartEdit:
         browser.find_element(By.CLASS_NAME, "shopping_cart_link").click()
         time.sleep(1)
         while items_in_cart != 0:
-            browser.find_element(By.CLASS_NAME, 'cart_button').click()
+            browser.find_element(By.CLASS_NAME, "cart_button").click()
             items_in_cart -= 1
             assert items_in_cart == page.get_cart_counter()
 
     @allure.epic("Cart Page Test")
     @allure.story(
         "TC_004.00.02 Cart | Edit Cart Items"
-        "Add to Cart from inventory Page > Go To Cart > Dell")
+        "Add to Cart from inventory Page > Go To Cart > Dell"
+    )
     def test_cart_del_items_random(self, browser):
         page = InventoryPage(browser, url=LOGIN_PAGE_URL)
         page.open()
@@ -55,6 +55,6 @@ class TestCartEdit:
             items_in_cart += 1
         browser.find_element(By.CLASS_NAME, "shopping_cart_link").click()
         while items_in_cart != random.randint(1, items_in_cart):
-            browser.find_element(By.CLASS_NAME, 'cart_button').click()
+            browser.find_element(By.CLASS_NAME, "cart_button").click()
             items_in_cart -= 1
             assert items_in_cart == page.get_cart_counter()
