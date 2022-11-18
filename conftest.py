@@ -5,24 +5,16 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
 
-@pytest.fixture
-def set_chrome_options():
-    chrome_options = Options()
-    # options.add_argument("--headless")
-    return chrome_options
+@pytest.fixture(params=['chrome', 'safari'], autouse=True)
+def driver(request):
+    if request.param == 'chrome':
+        driver = webdriver.Chrome(
+            service=Service(ChromeDriverManager().install()), options=Options()
+        )
+    else:
+        driver = webdriver.Safari()
 
+    driver.get('https://www.saucedemo.com/')
+    yield driver
+    driver.quit()
 
-@pytest.fixture
-def driver_init(set_chrome_options):
-    options = set_chrome_options
-    driver = webdriver.Chrome(
-        service=Service(ChromeDriverManager().install()), options=options
-    )
-    return driver
-
-
-@pytest.fixture(autouse=True)
-def driver(driver_init):
-    driver_init.get('https://www.saucedemo.com/')
-    yield driver_init
-    driver_init.quit()
