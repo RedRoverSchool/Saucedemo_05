@@ -44,6 +44,7 @@ class TestLoginPage:
         assert login_page.get_alert_text() == msg
 
     @allure.epic("Login Page Test")
+    @allure.story("TC_001.00.02 | Try to login unregistered/locked out user")
     @allure.story("Try to navigate to inventory page while logged out")
     def test_inventory_logout_user(self, browser):
         login_page = LoginPage(browser)
