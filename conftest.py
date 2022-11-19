@@ -15,6 +15,7 @@ import conf
 
 
 
+
 @pytest.fixture()
 def driver(browser):
     if browser == 'chrome':
