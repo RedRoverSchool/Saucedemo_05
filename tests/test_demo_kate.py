@@ -1,9 +1,11 @@
 from selenium.webdriver.common.by import By
 import allure
+import logging
 
 user_name = 'standard_user'
 password = 'secret_sauce'
 
+logger = logging.getLogger('QA Envirement')
 
 class TestSample:
     @allure.epic('Inventory')
@@ -12,6 +14,7 @@ class TestSample:
 
     def test_url(self, driver):
         # login as an authorized user
+        logger.info('Checking URL')
         driver.find_element(By.ID, 'user-name').send_keys(user_name)
         driver.find_element(By.ID, 'password').send_keys(password)
         driver.find_element(By.ID, 'login-button').click()
