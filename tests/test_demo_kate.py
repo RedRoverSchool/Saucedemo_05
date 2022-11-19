@@ -6,9 +6,10 @@ password = 'secret_sauce'
 
 
 class TestSample:
-    @allure.epic('Login test')
-    @allure.story('ent')
+    @allure.epic('Inventory')
+    @allure.story('TC_002_00_01')
     @allure.suite('regression')
+
     def test_url(self, driver):
         # login as an authorized user
         driver.find_element(By.ID, 'user-name').send_keys(user_name)
@@ -33,7 +34,3 @@ class TestSample:
     #     # make sure cart is counting right sum of items every click
     #     count_item_3 = self.driver.find_element(By.CLASS_NAME, 'shopping_cart_badge').text
     #     assert '3' == count_item_3, 'not right amount'
-# jhbgjlkh.jnsz
-# skkjhkjhns
-# hhjhkjk;lljncjknjbnjknb
-# kmkjknjkjnjknhjklcd
