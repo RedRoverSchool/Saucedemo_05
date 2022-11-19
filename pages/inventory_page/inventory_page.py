@@ -1,5 +1,4 @@
 from typing import List
-
 from pages.base_page.base_page import BasePage
 from pages.inventory_page.inventory_page_locators import InventoryPageLocators
 from selenium.webdriver.common.by import By
@@ -40,7 +39,7 @@ class InventoryPage(BasePage):
         self.close_burger_menu()
         self.refresh_page()
 
-    def find_items_cards(self):
+    def find_items_cards(self) -> List[WebElement]:
         return self.elements_are_present(InventoryPageLocators.ITEMS_CARDS)
 
     def extract_item_name(self, element: WebElement) -> str:
@@ -95,6 +94,9 @@ class InventoryPage(BasePage):
         return element.find_element(
             By.CSS_SELECTOR, InventoryPageLocators.ITEM_BUTTON
         ).text
+
+    def click_cart_button(self):
+        self.click_button(InventoryPageLocators.CART_LINK)
 
     def get_cart_counter(self) -> int:
         try:

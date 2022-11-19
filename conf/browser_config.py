@@ -1,6 +1,6 @@
 browser_config = {
     "browser": "Chrome",  # Safari, Firefox, Edge, Chrome
-    "headless": True,
+    "headless": False,
     "proxy_server": "",
     "user_agent": "",
 }

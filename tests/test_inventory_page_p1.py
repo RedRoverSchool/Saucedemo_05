@@ -81,3 +81,9 @@ class TestInventoryPage:
             items_in_cart += 1
             assert button_text == "REMOVE"
             assert items_in_cart == page.get_cart_counter()
+        items_in_cart = page.get_cart_counter()
+        for item in inventory_items:
+            button_text = page.click_item_cart_button(item).upper()
+            items_in_cart -= 1
+            assert button_text == "ADD TO CART"
+            assert items_in_cart == page.get_cart_counter()
