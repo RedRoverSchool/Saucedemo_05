@@ -72,7 +72,9 @@ def pytest_addoption(parser):
                      default="chrome"
                      )
 
-    parser.addoption("--url")
+    parser.addoption("--url",
+                     default="https://www.saucedemo.com/"
+                     )
 
 
 #
