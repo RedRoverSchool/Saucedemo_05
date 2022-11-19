@@ -15,7 +15,7 @@ import conf
 import logging
 
 logging.basicConfig(format='%(asctime)s %(name)s %(message)s', level=logging.INFO)
-logger = logging.getLogger('example')
+logger = logging.getLogger('QA Envirement')
 
 
 @pytest.fixture()
@@ -25,22 +25,25 @@ def driver(browser):
         chrome_option.headless = conf.BROWSER_HEADLESS
         driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_option
                                   )
+        logger.info('Tests are running on Chrome browser')
     elif browser == 'firefox':
         gecko_option = FirefoxOptions()
         gecko_option.headless = conf.BROWSER_HEADLESS
         driver = webdriver.Firefox(
             service=FirefoxService(GeckoDriverManager().install()), options=gecko_option
         )
+        logger.info('Tests are running on FireFox browser')
     elif browser == 'safari':
         driver = webdriver.Safari()
         driver.headless = conf.BROWSER_HEADLESS
-
+        logger.info('Tests are running on Safari browser')
     elif browser == 'edge':
         edge_options = EdgeOptions()
         driver = webdriver.Edge(
             service=EdgeService(EdgeChromiumDriverManager().install()),
             options=edge_options,
         )
+        logger.info('Tests are running on Edge browser')
     else:
         raise Exception("Wrong browser")
 
