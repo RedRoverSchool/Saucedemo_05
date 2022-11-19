@@ -29,6 +29,16 @@ def set_browser_options():
             options = FirefoxOptions()
         case "Edge":
             options = EdgeOptions()
+        case "Safari":
+            options = SafariOptions()
+        # case "Opera":
+        #     options = ChromeOptions()
+        #     options.add_argument('allow-elevated-browser')
+        #     options.add_argument('disable-infobars')
+        #     options.add_argument('--no-sandbox')
+        #     options.add_argument('--disable-dev-shm-usage')
+        #     options.add_argument('start-maximized')
+        #     options.add_experimental_option('w3c', True)
         case _:
             options = ChromeOptions()
 
@@ -69,6 +79,10 @@ def browser(set_browser_options):
         #     browser: WebDriver = webdriver.Chrome(
         #         service=ChromeService(OperaDriverManager().install()), options=options
         #     )
+        case "Safari":
+            browser: WebDriver = webdriver.Safari(
+                service=SafariService(), options=options
+            )
         case "Edge":
             browser: WebDriver = webdriver.Edge(
                 service=EdgeService(EdgeChromiumDriverManager().install()),
