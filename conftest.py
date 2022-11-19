@@ -12,8 +12,10 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 # from selenium.webdriver.safari.service import Service as SafariService
 import pytest
 import conf
+import logging
 
-
+logging.basicConfig(format='%(asctime)s %(name)s %(message)s', level=logging.INFO)
+logger = logging.getLogger('example')
 
 
 @pytest.fixture()
@@ -47,16 +49,18 @@ def driver(browser):
 
 @pytest.fixture(autouse=True)
 def tear_down(driver, url):
-    print('\n*** start fixture = setup ***\n')
+    logger.info('Trying to get url')
     driver.get(url)
     yield
+    logger.info('Trying close url')
     driver.quit()
-    print('\n*** end fixture = teardown ***\n')
+
 
 
 @pytest.fixture()
 def browser(request):
     return request.config.getoption("--browser")
+
 
 @pytest.fixture()
 def url(request):
@@ -64,13 +68,12 @@ def url(request):
 
 
 def pytest_addoption(parser):
-    parser.addoption("--browser")
+    parser.addoption("--browser",
+                     default="chrome"
+                     )
+
     parser.addoption("--url")
 
-    #     default="'https://www.saucedemo.com/'",
-    #     help="define url: https://www.saucedemo.com/"
-    # )
-#
 
 #
 # fixture for crossbrowser testing
