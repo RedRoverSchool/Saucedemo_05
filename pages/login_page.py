@@ -1,9 +1,8 @@
 from locators.login_locators import LoginLocators as ll
+from pages.base_page import BasePage
 
 
-class LoginPage:
-    def __init__(self, driver):
-        self.driver = driver
+class LoginPage(BasePage):
 
     def login_title(self):
         return self.driver.title
