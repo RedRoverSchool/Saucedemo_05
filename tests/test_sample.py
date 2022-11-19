@@ -1,7 +1,8 @@
-from constants import NEGATIVE_LOGIN_CREDENTIALS
-from pages.login_page import LoginPage
 import pytest
+
+from constants import NEGATIVE_LOGIN_CREDENTIALS
 from locators.login_locators import LoginLocators as ll
+from pages.login_page import LoginPage
 
 
 class TestSample:
