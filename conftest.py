@@ -1,4 +1,3 @@
-import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -11,7 +10,9 @@ from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 # from selenium.webdriver.safari.options import Options as SafariOptions
 # from selenium.webdriver.safari.service import Service as SafariService
+import pytest
 import conf
+
 
 
 @pytest.fixture()
@@ -64,6 +65,7 @@ def url(request):
 def pytest_addoption(parser):
     parser.addoption("--browser")
     parser.addoption("--url")
+
     #     default="'https://www.saucedemo.com/'",
     #     help="define url: https://www.saucedemo.com/"
     # )
