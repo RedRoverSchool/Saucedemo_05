@@ -37,4 +37,3 @@ class CartPage(BasePage):
 
     def click_item_remove(self, element: WebElement) -> None:
         element.find_element(By.CSS_SELECTOR, CartPageLocators.ITEM_BTN).click()
-

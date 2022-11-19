@@ -30,4 +30,3 @@ class TestCartPage:
             items_in_cart_cnt -= 1
             assert items_in_cart_cnt == page.get_cart_counter()
         assert page.get_cart_counter() == 0
-
