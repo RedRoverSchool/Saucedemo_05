@@ -14,7 +14,7 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 import conf
 
 
-@pytest.fixture(scope='class')
+@pytest.fixture()
 def driver(browser):
     if browser == 'chrome':
         chrome_option = ChromeOptions()
@@ -43,33 +43,32 @@ def driver(browser):
     return driver
 
 
-@pytest.fixture(scope='class', autouse=True)
-def tear_down(driver):
+@pytest.fixture(autouse=True)
+def tear_down(driver, url):
     print('\n*** start fixture = setup ***\n')
-    driver.get('https://www.saucedemo.com/')
+    driver.get(url)
     yield
     driver.quit()
     print('\n*** end fixture = teardown ***\n')
 
 
-@pytest.fixture(scope='class', autouse=True)
+@pytest.fixture()
 def browser(request):
     return request.config.getoption("--browser")
+
+@pytest.fixture()
+def url(request):
+    return request.config.getoption("--url")
 
 
 def pytest_addoption(parser):
     parser.addoption("--browser")
-
-
-    # parser.addoption(
-    #     url="--url",
+    parser.addoption("--url")
     #     default="'https://www.saucedemo.com/'",
     #     help="define url: https://www.saucedemo.com/"
     # )
 #
-# @pytest.fixture(scope='class')
-# def url(request):
-#     return request.config.getoption("--url")
+
 #
 # fixture for crossbrowser testing
 # @pytest.fixture(params=['chrome', 'safari'], autouse=True)
