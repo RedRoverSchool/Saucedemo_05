@@ -1,13 +1,21 @@
 from typing import List
-
 from pages.base_page.base_page import BasePage
-from pages.login_page.login_page import LoginPage
 from pages.inventory_page.inventory_page_locators import InventoryPageLocators
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
+from conf.website_config import WebSiteConfig
+from selenium.webdriver.chrome.webdriver import WebDriver
 
 
-class InventoryPage(LoginPage, BasePage):
+class InventoryPage(BasePage):
+    def __init__(self, browser: WebDriver):
+        self.browser = browser
+        self.url = WebSiteConfig.INVENTORY_PAGE_URL
+        super().__init__(browser=self.browser, url=self.url)
+
+    def navigate_to_inventory_page(self):
+        self.navigate_to(url=WebSiteConfig.INVENTORY_PAGE_URL)
+
     def open_burger_menu(self):
         self.click_button(InventoryPageLocators.BTN_BURGER_MENU)
 
@@ -31,7 +39,7 @@ class InventoryPage(LoginPage, BasePage):
         self.close_burger_menu()
         self.refresh_page()
 
-    def find_items_cards(self):
+    def find_items_cards(self) -> List[WebElement]:
         return self.elements_are_present(InventoryPageLocators.ITEMS_CARDS)
 
     def extract_item_name(self, element: WebElement) -> str:
@@ -87,9 +95,14 @@ class InventoryPage(LoginPage, BasePage):
             By.CSS_SELECTOR, InventoryPageLocators.ITEM_BUTTON
         ).text
 
+    def click_cart_button(self):
+        self.click_button(InventoryPageLocators.CART_LINK)
+
     def get_cart_counter(self) -> int:
         try:
-            cnt = self.element_is_present(InventoryPageLocators.CART_BADGE)
-            return int(cnt.text)
+            cart_items_counter = self.element_is_present(
+                InventoryPageLocators.CART_BADGE
+            )
+            return int(cart_items_counter.text)
         except:
             return 0
