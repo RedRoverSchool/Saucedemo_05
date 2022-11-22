@@ -1,10 +1,9 @@
-from pages.base_page.base_page import BasePage
-from pages.login_page.login_page import LoginPage
+from pages.inventory_page.inventory_page import InventoryPage
 from pages.detailed_page.detailed_page_locator import DetailedPageLocators
 from pages.inventory_page.inventory_page_locators import InventoryPageLocators
 
 
-class DetailedPage(LoginPage, BasePage):
+class DetailedPage(InventoryPage):
     def open_first_item(self):
         self.click_button(InventoryPageLocators.ITEM_NAME)
 
