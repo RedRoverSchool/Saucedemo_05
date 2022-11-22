@@ -9,7 +9,6 @@ sorting_name_cases = ("Name (Z to A)", "Name (A to Z)")
 
 
 class TestInventoryPage:
-
     def login_standard_user(self, browser):
         page = InventoryPage(browser)
         page.open()
