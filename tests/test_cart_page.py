@@ -5,21 +5,23 @@ import random
 from selenium.webdriver.common.by import By
 from pages.login_page.login_page import LoginPage
 from pages.inventory_page.inventory_page import InventoryPage
+from pages.cart_page.cart_page_locators import CartPageLocators
 from pages.cart_page.cart_page import CartPage
 from conf.website_config import WebSiteConfig
-
-CART_URL = "https://www.saucedemo.com/cart.html"
 
 
 class TestCartPage:
     @allure.epic("Cart Page Test")
     @allure.story("TC_004.00 Cart | URL")
-    def test_cart_url(self, browser):
+    def test_cart_url_btn(self, browser):
         page = LoginPage(browser)
         page.open()
         page.login_standard_user()
-        browser.find_element(By.CLASS_NAME, "shopping_cart_link").click()
-        assert browser.current_url == CART_URL
+        page = InventoryPage(browser)
+        page.click_cart_button()
+        assert browser.current_url == WebSiteConfig.CART_PAGE_URL
+        assert page.element_is_clickable(CartPageLocators.BTN_CHECKOUT)
+        assert page.element_is_clickable(CartPageLocators.BTN_CONTINUE_SHOPPING)
 
     @allure.epic("Cart Page Test")
     @allure.story("TC_")
@@ -45,43 +47,45 @@ class TestCartPage:
 
     @allure.epic("Cart Page Test")
     @allure.story(
-        "TC_004.00.__ Cart | Edit Cart Items"
+        "TC_004.00.02 Cart | Edit Cart Items"
         "Add to Cart from inventory Page > Go To Cart > Dell"
     )
-    def test_cart_del_items_all(self, browser):
+    def test_cart_page_remove_items_random(self, browser):
         page = LoginPage(browser)
         page.open()
         page.login_standard_user()
         page = InventoryPage(browser)
         inventory_items = page.find_items_cards()
-        items_in_cart = 0
-        for item in inventory_items:
+        for item in random.sample(inventory_items, 4):
             page.click_item_cart_button(item)
-            items_in_cart += 1
-        browser.find_element(By.CLASS_NAME, "shopping_cart_link").click()
-        time.sleep(1)
-        while items_in_cart != 0:
-            browser.find_element(By.CLASS_NAME, "cart_button").click()
-            items_in_cart -= 1
-            assert items_in_cart == page.get_cart_counter()
+        items_in_cart_cnt = page.get_cart_counter()
+        page.click_cart_button()
+        page = CartPage(browser)
+        items_in_cart = page.find_items_cart_cards()
+        for item in random.sample(items_in_cart, 2):
+            page.click_item_remove(item)
+            items_in_cart_cnt -= 1
+            assert items_in_cart_cnt == page.get_cart_counter()
 
     @allure.epic("Cart Page Test")
     @allure.story(
         "TC_004.00.02 Cart | Edit Cart Items"
-        "Add to Cart from inventory Page > Go To Cart > Dell"
+        "Add to Cart from inventory Page > Go To Cart > Dell > Continue Shopping"
     )
-    def test_cart_del_items_random(self, browser):
+    def test_cart_page_remove_items_random_btn_cont_shopping(self, browser):
         page = LoginPage(browser)
         page.open()
         page.login_standard_user()
         page = InventoryPage(browser)
         inventory_items = page.find_items_cards()
-        items_in_cart = 0
-        for item in random.sample(inventory_items, 3):
+        for item in random.sample(inventory_items, 5):
             page.click_item_cart_button(item)
-            items_in_cart += 1
-        browser.find_element(By.CLASS_NAME, "shopping_cart_link").click()
-        while items_in_cart != random.randint(1, items_in_cart):
-            browser.find_element(By.CLASS_NAME, "cart_button").click()
-            items_in_cart -= 1
-            assert items_in_cart == page.get_cart_counter()
+        items_in_cart_cnt = page.get_cart_counter()
+        page.click_cart_button()
+        page = CartPage(browser)
+        items_in_cart = page.find_items_cart_cards()
+        for item in random.sample(items_in_cart, 3):
+            page.click_item_remove(item)
+            items_in_cart_cnt -= 1
+        page.click_button(CartPageLocators.BTN_CONTINUE_SHOPPING)
+        assert browser.current_url == WebSiteConfig.INVENTORY_PAGE_URL
