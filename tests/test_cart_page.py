@@ -56,13 +56,15 @@ class TestCartPage:
         page.login_standard_user()
         page = InventoryPage(browser)
         inventory_items = page.find_items_cards()
-        for item in random.sample(inventory_items, 4):
+        random_num = random.randint(1, 6)
+        for item in random.sample(inventory_items, random_num):
             page.click_item_cart_button(item)
         items_in_cart_cnt = page.get_cart_counter()
         page.click_cart_button()
         page = CartPage(browser)
         items_in_cart = page.find_items_cart_cards()
-        for item in random.sample(items_in_cart, 2):
+        random_num_2 = random.randint(1, random_num)
+        for item in random.sample(items_in_cart, random_num_2):
             page.click_item_remove(item)
             items_in_cart_cnt -= 1
             assert items_in_cart_cnt == page.get_cart_counter()
@@ -78,13 +80,15 @@ class TestCartPage:
         page.login_standard_user()
         page = InventoryPage(browser)
         inventory_items = page.find_items_cards()
-        for item in random.sample(inventory_items, 5):
+        randon_num = random.randint(1, 6)
+        for item in random.sample(inventory_items, randon_num):
             page.click_item_cart_button(item)
         items_in_cart_cnt = page.get_cart_counter()
         page.click_cart_button()
         page = CartPage(browser)
         items_in_cart = page.find_items_cart_cards()
-        for item in random.sample(items_in_cart, 3):
+        randon_num_2 = random.randint(1, randon_num)
+        for item in random.sample(items_in_cart, randon_num_2):
             page.click_item_remove(item)
             items_in_cart_cnt -= 1
         page.click_button(CartPageLocators.BTN_CONTINUE_SHOPPING)
