@@ -2,8 +2,8 @@ from selenium.webdriver.common.by import By
 
 
 class DetailedPageLocators:
-    ADD_TO_CART_BUTTON = (
-        By.CSS_SELECTOR,
-        "#add-to-cart-sauce-labs-backpack",
-    )  # button "add to cart" on detailed page
-    REMOVE_BUTTON = (By.CSS_SELECTOR, "remove-sauce-labs-backpack")
+    # button "add to cart" on detailed page
+    ADD_TO_CART_BUTTON = (By.XPATH, "//button[text()='Add to cart']")
+
+    # button "add to cart" on detailed page
+    REMOVE_BUTTON = (By.XPATH, "//button[text()='Remove']")

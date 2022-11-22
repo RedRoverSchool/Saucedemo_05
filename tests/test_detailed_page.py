@@ -18,3 +18,8 @@ class TestDetailedPage:
             page.element_is_not_visible(DetailedPageLocators.ADD_TO_CART_BUTTON),
             "there is add button",
         )
+
+        assert (
+            page.element_is_visible(DetailedPageLocators.REMOVE_BUTTON),
+            "there is no remove button",
+        )
