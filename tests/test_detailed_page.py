@@ -2,13 +2,17 @@ import pytest
 import allure
 from pages.detailed_page.detailed_page import DetailedPage
 from pages.detailed_page.detailed_page_locator import DetailedPageLocators
+from pages.login_page.login_page import LoginPage
 
-LOGIN_PAGE_URL = "https://www.saucedemo.com/"
+# LOGIN_PAGE_URL = "https://www.saucedemo.com/"
 
 
 class TestDetailedPage:
     def test_add_to_cart(self, browser):
-        page = DetailedPage(browser, url=LOGIN_PAGE_URL)
+        page = LoginPage(browser)
+        page.open()
+        page.login_standard_user()
+        page = DetailedPage(browser)
         page.open()
         page.login_standard_user()
         page.open_first_item()
