@@ -84,5 +84,5 @@ def get_utc_ms_time(value):
         if isinstance(value, str):
             date_obj = datetime.strptime(value, "%Y-%m-%d %H:%M:%S")
         return int(time.mktime(date_obj.timetuple())) * 1000
-    except:
+    except Exception:
         return ""
