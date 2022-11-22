@@ -4,8 +4,8 @@ from pages.detailed_page.detailed_page import DetailedPage
 from pages.detailed_page.detailed_page_locator import DetailedPageLocators
 from pages.login_page.login_page import LoginPage
 
-class TestDetailedPage:
 
+class TestDetailedPage:
     def open_page(self, browser):
         page = DetailedPage(browser)
         page.open()
