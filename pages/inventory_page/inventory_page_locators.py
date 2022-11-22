@@ -16,8 +16,8 @@ class InventoryPageLocators:
     PRODUCTS_CARDS = (By.CSS_SELECTOR, ".inventory_list > div")
     FOOTER_LINKS = (By.CSS_SELECTOR, "div#page_wrapper li")
 
-    ITEM_NAME = ".inventory_item_name"
-    ITEM_DESC = ".inventory_item_desc"
-    ITEM_PRICE = ".inventory_item_price"
-    ITEM_IMAGE = ".inventory_item_img a img"
-    ITEM_BUTTON = ".btn_inventory"
+    ITEM_NAME = (By.CSS_SELECTOR, ".inventory_item_name")
+    ITEM_DESC = (By.CSS_SELECTOR, ".inventory_item_desc")
+    ITEM_PRICE = (By.CSS_SELECTOR, ".inventory_item_price")
+    ITEM_IMAGE = (By.CSS_SELECTOR, ".inventory_item_img a img")
+    ITEM_BUTTON = (By.CSS_SELECTOR, ".btn_inventory")
