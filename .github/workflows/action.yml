@@ -77,13 +77,10 @@ jobs:
           ref: gh-pages
           path: gh-pages
 
-      - name: Allure Report action from marketplace
+      - name: Allure Report
         uses: simple-elf/allure-report-action@master
         if: always()
-        id: allure-report
         with:
-          allure_results: allure-report
-          gh_pages: gh-pages
           allure_report: allure-report
           allure_history: allure-history
 
@@ -93,7 +90,7 @@ jobs:
         env:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: allure-report
+          publish_dir: allure-history
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
 
