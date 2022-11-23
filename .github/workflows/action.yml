@@ -65,8 +65,9 @@ jobs:
       #----------------------------------------------
       #              run test suite
       #----------------------------------------------
-      - name: Run tests
-        run: poetry run pytest -s -v --alluredir=./allure-report -n auto
+      - name: run all tests
+        if: always()
+        run: poetry run pytest --alluredir=allure-results -n auto
         continue-on-error: true
 
       - name: Get Allure history
@@ -81,7 +82,7 @@ jobs:
         uses: simple-elf/allure-report-action@master
         if: always()
         with:
-          allure_results: allure-report
+          allure_results: allure-results
           allure_history: allure-history
 
       - name: Deploy report to Github Pages
