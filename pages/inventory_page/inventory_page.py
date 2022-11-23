@@ -6,12 +6,14 @@ from selenium.webdriver.remote.webelement import WebElement
 from conf.website_config import WebSiteConfig
 from selenium.webdriver.chrome.webdriver import WebDriver
 
+from pages.login_page.login_page import LoginPage
 
-class InventoryPage(BasePage):
+
+class InventoryPage(LoginPage):
     def __init__(self, browser: WebDriver):
         self.browser = browser
         self.url = WebSiteConfig.INVENTORY_PAGE_URL
-        super().__init__(browser=self.browser, url=self.url)
+        super().__init__(browser=self.browser)
 
     def navigate_to_inventory_page(self):
         self.navigate_to(url=WebSiteConfig.INVENTORY_PAGE_URL)
@@ -43,9 +45,7 @@ class InventoryPage(BasePage):
         return self.elements_are_present(InventoryPageLocators.ITEMS_CARDS)
 
     def extract_item_name(self, element: WebElement) -> str:
-        return element.find_element(
-            By.CSS_SELECTOR, InventoryPageLocators.ITEM_NAME
-        ).text
+        return element.find_element(*InventoryPageLocators.ITEM_NAME).text
 
     def extract_items_names(self, we_list: List[WebElement]) -> List:
         names = []
@@ -54,9 +54,7 @@ class InventoryPage(BasePage):
         return names
 
     def extract_item_desc(self, element: WebElement) -> str:
-        return element.find_element(
-            By.CSS_SELECTOR, InventoryPageLocators.ITEM_DESC
-        ).text
+        return element.find_element(*InventoryPageLocators.ITEM_DESC).text
 
     def extract_items_descs(self, we_list: List[WebElement]) -> List:
         descs = []
@@ -65,9 +63,7 @@ class InventoryPage(BasePage):
         return descs
 
     def extract_item_price(self, element: WebElement) -> str:
-        return element.find_element(
-            By.CSS_SELECTOR, InventoryPageLocators.ITEM_PRICE
-        ).text
+        return element.find_element(*InventoryPageLocators.ITEM_PRICE).text
 
     def extract_items_prices(self, we_list: List[WebElement]) -> List:
         prices = []
@@ -76,9 +72,9 @@ class InventoryPage(BasePage):
         return prices
 
     def extract_item_img_link(self, element: WebElement) -> str:
-        return element.find_element(
-            By.CSS_SELECTOR, InventoryPageLocators.ITEM_IMAGE
-        ).get_property("src")
+        return element.find_element(*InventoryPageLocators.ITEM_IMAGE).get_property(
+            "src"
+        )
 
     def extract_items_links(self, we_list: List[WebElement]) -> List:
         links = []
@@ -90,10 +86,8 @@ class InventoryPage(BasePage):
         self.select_dropdown_option(InventoryPageLocators.DROPDOWN_SORTING, sorting)
 
     def click_item_cart_button(self, element: WebElement) -> str:
-        element.find_element(By.CSS_SELECTOR, InventoryPageLocators.ITEM_BUTTON).click()
-        return element.find_element(
-            By.CSS_SELECTOR, InventoryPageLocators.ITEM_BUTTON
-        ).text
+        element.find_element(*InventoryPageLocators.ITEM_BUTTON).click()
+        return element.find_element(*InventoryPageLocators.ITEM_BUTTON).text
 
     def click_cart_button(self):
         self.click_button(InventoryPageLocators.CART_LINK)

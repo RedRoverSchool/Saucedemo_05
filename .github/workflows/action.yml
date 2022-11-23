@@ -1,9 +1,5 @@
 name: selenium_test
 on:
-  push:
-    branches:
-      - "develop"
-      - "main"
   pull_request:
     branches:
       - "develop"
@@ -12,7 +8,7 @@ on:
 permissions:
   checks: write
   pull-requests: write
-  contents: read
+  contents: write
 
 jobs:
   selenium_test:
@@ -69,20 +65,34 @@ jobs:
       #----------------------------------------------
       #              run test suite
       #----------------------------------------------
-      - name: Run tests
-        run: |
-          source .venv/bin/activate
-          pytest tests/ --junitxml report.xml
-      - name: Create test summary
-        uses: test-summary/action@v2.0
-        with:
-          paths: report.xml
+      - name: run all tests
         if: always()
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
+        run: poetry run pytest --alluredir=allure-results -n auto
+        continue-on-error: true
+
+      - name: Get Allure history
+        uses: actions/checkout@v3
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Allure Report
+        uses: simple-elf/allure-report-action@master
         if: always()
         with:
-          junit_files: "report.xml"
+          allure_results: allure-results
+          allure_history: allure-history
+
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v2
+        env:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
+
       #----------------------------------------------
       #              save report for download
       #----------------------------------------------
