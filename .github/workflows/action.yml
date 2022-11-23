@@ -8,7 +8,7 @@ on:
 permissions:
   checks: write
   pull-requests: write
-  contents: read
+  contents: write
 
 jobs:
   selenium_test:
@@ -65,8 +65,9 @@ jobs:
       #----------------------------------------------
       #              run test suite
       #----------------------------------------------
-      - name: Run tests
-        run: poetry run pytest -s -v --alluredir=./allure-report -n auto
+      - name: run all tests
+        if: always()
+        run: poetry run pytest --alluredir=allure-results -n auto
         continue-on-error: true
 
       - name: Get Allure history
@@ -77,25 +78,20 @@ jobs:
           ref: gh-pages
           path: gh-pages
 
-      - name: Allure Report action from marketplace
+      - name: Allure Report
         uses: simple-elf/allure-report-action@master
         if: always()
-        id: allure-report
         with:
           allure_results: allure-results
-          gh_pages: gh-pages
-          allure_report: allure-report
           allure_history: allure-history
 
       - name: Deploy report to Github Pages
         if: always()
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v2
         env:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: allure-report
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
 
       #----------------------------------------------
       #              save report for download
