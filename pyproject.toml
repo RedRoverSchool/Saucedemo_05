@@ -15,6 +15,7 @@ flake8 = "^5.0.4"
 allure-pytest = "^2.11.1"
 Faker = "^15.3.2"
 pytest-xdist = "^3.0.2"
+pytest-failed-screenshot = {git = "https://github.com/demmi/pytest-failed-screenshot.git"}
 
 
 [build-system]
