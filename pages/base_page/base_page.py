@@ -111,7 +111,7 @@ class BasePage:
         self.browser.implicitly_wait(seconds)
 
     def get_element_text(self, locator):
-        element = self.browser.find_element(locator)
+        element = self.browser.find_element(*locator)
         return element.text
 
     def get_attribute(self, locator, name: str):
