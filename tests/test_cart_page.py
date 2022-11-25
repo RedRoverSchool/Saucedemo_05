@@ -1,13 +1,7 @@
 import allure
-import pytest
-import time
 import random
-from selenium.webdriver.common.by import By
-from pages.login_page.login_page import LoginPage
-from pages.inventory_page.inventory_page import InventoryPage
-from pages.cart_page.cart_page_locators import CartPageLocators
 from pages.cart_page.cart_page import CartPage
-from tests.test_detailed_page import TestDetailedPage
+from pages.cart_page.cart_page_locators import CartPageLocators
 from conf.website_config import WebSiteConfig
 
 
@@ -28,6 +22,7 @@ class TestCartPage:
         assert page.get_element_text(CartPageLocators.DESCR) == "DESCRIPTION"
         assert page.element_is_present(CartPageLocators.BTN_CHECKOUT)
         assert page.get_element_text(CartPageLocators.BTN_CHECKOUT) == "CHECKOUT"
+        assert page.get_element_text(CartPageLocators.BTN_CONTINUE_SHOPPING) == "CONTINUE SHOPPING"
 
     @allure.epic("Cart Page Test")
     @allure.story("TC_")
