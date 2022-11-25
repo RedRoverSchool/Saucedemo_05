@@ -1,7 +1,5 @@
 from typing import List
-from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
-from pages.base_page.base_page import BasePage
 from pages.inventory_page.inventory_page import InventoryPage
 from pages.inventory_page.inventory_page_locators import InventoryPageLocators
 from conf.website_config import WebSiteConfig
@@ -37,4 +35,4 @@ class CartPage(InventoryPage):
         return self.elements_are_present(CartPageLocators.ITEM_CARD)
 
     def click_item_remove(self, element: WebElement) -> None:
-        element.find_element(By.CSS_SELECTOR, CartPageLocators.ITEM_BTN).click()
+        element.find_element(*CartPageLocators.ITEM_BTN).click()
