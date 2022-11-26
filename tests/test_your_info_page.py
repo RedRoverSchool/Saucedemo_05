@@ -28,10 +28,22 @@ class TestYourInfoPage:
         page.click_cart_button()
         page.click_button(CartPageLocators.BTN_CHECKOUT)
         assert browser.current_url == WebSiteConfig.YOUR_INFO_URL
-        assert page.get_element_text(YourInfoLocators.TITLE) == "CHECKOUT: YOUR INFORMATION"
-        assert page.get_attribute(YourInfoLocators.INPUT_FIRST_NAME, "placeholder") == "First Name"
-        assert page.get_attribute(YourInfoLocators.INPUT_LAST_NAME, "placeholder") == "Last Name"
-        assert page.get_attribute(YourInfoLocators.INPUT_ZIP_CODE, "placeholder") == "Zip/Postal Code"
+        assert (
+            page.get_element_text(YourInfoLocators.TITLE)
+            == "CHECKOUT: YOUR INFORMATION"
+        )
+        assert (
+            page.get_attribute(YourInfoLocators.INPUT_FIRST_NAME, "placeholder")
+            == "First Name"
+        )
+        assert (
+            page.get_attribute(YourInfoLocators.INPUT_LAST_NAME, "placeholder")
+            == "Last Name"
+        )
+        assert (
+            page.get_attribute(YourInfoLocators.INPUT_ZIP_CODE, "placeholder")
+            == "Zip/Postal Code"
+        )
         assert page.element_is_present(InventoryPageLocators.CART_LINK)
         assert page.element_is_present(YourInfoLocators.BTN_CANCEL)
         assert page.element_is_present(YourInfoLocators.BTN_CONTINUE)
@@ -54,6 +66,3 @@ class TestYourInfoPage:
         page.send_keys_to_input(YourInfoLocators.INPUT_ZIP_CODE, "234589")
         page.click_continue()
         assert browser.current_url == WebSiteConfig.OVERVIEW_URL
-
-
-

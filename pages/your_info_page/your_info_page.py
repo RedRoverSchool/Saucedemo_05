@@ -7,7 +7,6 @@ from pages.cart_page.cart_page import CartPage
 
 
 class YourInfoPage(CartPage):
-
     def click_cancel(self):
         self.click_button(YourInfoLocators.BTN_CANCEL)
 
