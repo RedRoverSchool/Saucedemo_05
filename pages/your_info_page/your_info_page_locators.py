@@ -10,3 +10,5 @@ class YourInfoLocators:
 
     BTN_CANCEL = (By.ID, "cancel")
     BTN_CONTINUE = (By.ID, "continue")
+
+    ERR_MSG = (By.XPATH, '//*[contains(@data-test, "error")]')
