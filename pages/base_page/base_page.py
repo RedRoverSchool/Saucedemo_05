@@ -115,7 +115,7 @@ class BasePage:
         return element.text
 
     def get_attribute(self, locator, name: str):
-        element = self.browser.find_element(locator)
+        element = self.browser.find_element(*locator)
         return element.get_attribute(name)
 
     def select_by_index(self, locator, index: int):
