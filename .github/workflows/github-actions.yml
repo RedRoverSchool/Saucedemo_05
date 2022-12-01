@@ -1,22 +1,16 @@
-name: selenium_test
-on: [push, pull_request]
-
-permissions:
-  checks: write
-  pull-requests: write
-  contents: read
-
+name: GitHub Actions Saucedemo
+on: [push]
 jobs:
-  selenium_test:
+  GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out this repo
+      - name: Checkout this repo
         uses: actions/checkout@v3
-      - name: Set up Python
+      - name: Setup Python             #github actions marketplace > setup python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-      - name: Check code for errors by flake8 and format code with black
+      - name: Black and flake8          # >python lint>Python Code Quality and Lint
         uses: ricardochaves/python-lint@v1.4.0
         with:
           python-root-list: ""
@@ -28,50 +22,42 @@ jobs:
           use-isort: false
           extra-pylint-options: ""
           extra-pycodestyle-options: ""
-          extra-flake8-options: "--count --benchmark --ignore=E501,F401"
-          extra-black-options: ". -S --line-length 79"
+          extra-flake8-options: "--count --benchmark --ignore=E501,F401,F403,F405,W503"
+          extra-black-options: ". -S"
           extra-mypy-options: ""
           extra-isort-options: ""
       - name: Update repo
         run: sudo apt-get update
-      #----------------------------------------------
-      #  -----  install browsers  -----
-      #----------------------------------------------
-      - name: Install Chrome 
+        #----------------------------------------------
+        #  -----  install browsers  -----
+        #----------------------------------------------
+      - name: Install Chrome
         uses: browser-actions/setup-chrome@latest
       - name: Install Firefox
         uses: riccione/setup_firefox@v1
       - name: Check Chromium version
         run: chromium-browser --version
-
-      #----------------------------------------------
-      #  -----  install & configure poetry  -----
-      #----------------------------------------------
-      - name: Install Poetry
+      - name: Install poetry
         uses: snok/install-poetry@v1
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
           installer-parallel: true
-
-      #----------------------------------------------
-      #       load cached venv if cache exists
-      #----------------------------------------------
       - name: Load cached venv
         id: cached-poetry-dependencies
         uses: actions/cache@v3
         with:
           path: .venv
           key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+
       #----------------------------------------------
       # install dependencies if cache does not exist
       #----------------------------------------------
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-interaction --no-root
-      #----------------------------------------------
-      # install your root project, if required
-      #----------------------------------------------
+#      - name: Run pytest
+#        run: poetry run pytest
       - name: Install project
         run: poetry install --no-interaction
       #----------------------------------------------
@@ -80,7 +66,7 @@ jobs:
       - name: Run tests
         run: |
           source .venv/bin/activate
-          pytest tests/ --junitxml report.xml --headless
+          pytest tests/ --junitxml report.xml
       - name: Create test summary
         uses: test-summary/action@v2.0
         with:
@@ -96,7 +82,6 @@ jobs:
       #----------------------------------------------
       - name: Upload report using artifacts
         uses: actions/upload-artifact@v3
-        if: failure()
-        with: 
+        with:
           name: report
           path: /home/runner/work/Saucedemo_05/Saucedemo_05/report/

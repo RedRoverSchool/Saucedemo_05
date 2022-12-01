@@ -1,89 +1,137 @@
-<a name="readme-top"></a>
-# Saucedemo_05 [![GitHub Actions saucedemo](https://github.com/ivanovajulika/RedRover/actions/workflows/action.yml/badge.svg)](https://github.com/ivanovajulika/RedRover/actions/workflows/action.yml)
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
+[![GitHub Actions saucedemo](https://github.com/ivanovajulika/RedRover/actions/workflows/action.yml/badge.svg)](https://github.com/Elvorob/Saucedemo/actions)
+# ***SAUCEDEMO***
+
+[Web-Site]👉
+[<img src="https://www.saucedemo.com/static/media/Login_Bot_graphic.20658452.png" width="120" height="120">](https://www.saucedemo.com/)
+[OUR]👉
+[<img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/trello_logo_icon_168452.png" width="115" height="70">](https://trello.com/b/kW09yTkM/practice-letsdoit-group)
+
+# Table of contents
+- [Как работать с репозиторием?](#some-inst)
+- [Pytest INFO](#some-pytest)
+- [Poetry](#some-poetry)
+- [Python html report](#some-html)
+- [Allure](#some-allure)
+- [Creat Allure single HTML file builder](#some-allure-html-file)
+- [Useful links](#some-links)
+___
+
+# **Как работать с репозиторием?:** <a name="some-inst"></a>
+<img src="https://www.press-store.net/_pu/0/29765718.jpg" width="60" height="60"> 
+
+👉[Ссылка на инструкцию](https://docs.google.com/document/d/1-eqVnOTsdPmREaV7frzYSc0VGnU-3FhHAfutOBCzdCw/edit?usp=sharing)
+
+# Pytest INFO:<a name="some-pytest"></a> [![pytest](https://img.shields.io/badge/pytest-website-brightgreen.svg?style=flat-square)](https://docs.pytest.org/en/7.2.x/)
+
+> ***Do not forget check your tests with black and flake8 befor pushing***
+
+### **pytest flags**
+    -s - prints desired output (pytest -s test_file_name)
+    
+    -v - shows test process' percentage (pytest -v test_file_name)
+    
+    -m - allows to run tests with specific marks (pytest -m mark_title test_file_name)
+
+### **pytest-xdist**
+
+##### *Запускает несколько тестов одновременно* 
+
+    pytest -n auto OR pytest -n 5( any number)
+    
+⬆️(back to [Menu](#table-of-contents))
+___
+# POETRY<a name="some-poetry"></a> 
+#### WEB с дополнительной информацией &middot;[![poetry](https://img.shields.io/badge/poetry-website-brightgreen.svg?style=flat-square)](https://python-poetry.org/docs/)
+  
+### *Running all tests in the project with poetry:*
+  
+    poetry run pytest 
+  
+### *Running test by name with poetry:*
+  
+    poetry run pytest test_name.py 
+  
+### *Shou setups and PASSED/FAILED^*
+  
+    poetry run pytest test_name.py --setup-show -sv 
+    
+⬆️(back to [Menu](#table-of-contents))
+___
+# PYTHON_HTML_REPORT <a name="some-html"></a>
+#### WEB с дополнительной информацией &middot;[![pytest-html](https://img.shields.io/badge/pyhtml-website-brightgreen.svg?style=flat-square)](https://pytest-html.readthedocs.io/en/latest/user_guide.html)
+### ***Installation:***
+    pip install pytest-html
+
+### *How add python-html reports*:
+  
+    poetry add pytest -html
+
+### ***Start:***
+  
+    poetry run pytest <your_test_name.py> --html=report/report.html --self-contained-html
+    
+##### right click to file > open in browser or in finder  
+##### report.html - the name of the file, it can be anything
+
+⬆️<sup>(back to [Menu](#table-of-contents))</sup>
+___
+# ALLURE <a name="some-allure"></a>
+#### WEB с дополнительной информацией &middot;[![WEB-SITE](https://img.shields.io/badge/allure-website-brightgreen.svg?style=flat-square)](https://docs.qameta.io/allure/#_pytest)
+
+### ***Installation:***
+    pip install allure-pytest
+    pip install allure-combine
+  
+### ***1. Create allure:***
+  
+###### Соберёт отчеты по всем тестам:
+  
+    pytest --alluredir=allure
+  
+###### Соберёт отчет по  указанному тесту:
+  
+    pytest имя теста --alluredir=allure
+  
+### ***2. Generates a report and opens it in a browser::***
+     
+    allure serve allure
+      
+### ***3. Report generated for allure-report:***
+  
+    allure generate <директория где лежит отчет>
+  
+### ***4. Create single HTML report:***<a name="some-allure-html-file"></a>
+-создает файл с отчетом `complete.html`(можно делиться с другими) 
+  
+    allure-combine ./allure-report
+  
+-delete  `sinon.js` и `server.js`
+  
+### ***Open allure report:***
+  
+    allure open <directory>  
+
+### ***Clean allure report:***
+  
+    allure report clean 
+
+### ***Change directory:***
+
+    allure generate old directory-o new directory
+___
+# Useful links <a name="some-links"></a>
+
+👉[Установка Black](https://pypi.org/project/black/)
+
+👉[Установка Flake8](https://flake8.pycqa.org/en/latest/index.html#quickstart)
+
+👉[About SELENIUM](https://selenium-python.readthedocs.io/)
+
+👉[About SELENIUM.2](https://www.selenium.dev/documentation/)
+
+👉[About Python](https://www.python.org/)
+
+👉[Allure-combine](https://pypi.org/project/allure-combine/)
 
 
-<!-- ABOUT THE PROJECT -->
-## Python UI testing framework
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-### Built With
-
-* https://www.python.org/
-* https://python-poetry.org/
-* https://www.selenium.dev/
-* https://pytest.org/
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-### Prerequisites
-
-- install python ^3.10
-- install poetry
-
-### Installation
-
-1. Install dependencies `$poetry install` 
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-- Run all tests
-`$poetry run pytest`
-
-- Run only specific test
-`$poetry run pytest tests/<test_filename>`
-
-- Run only specific function from the test
-`$poetry run pytest -k '<part_of_test_fn_name>'`
-
-- Run only smoke tests
-`$poetry run pytest -m smoke`
-
-- Run only regression tests
-`$poetry run pytest -m regression`
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-### Links
-
-target: https://www.saucedemo.com/
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
-[python.org]:https://www.python.org/static/community_logos/python-logo.png
-[python-poetry.org]: https://python-poetry.org/images/logo-origami.svg
-[Selenium.dev]: http://www.w3.org/2000/svg
-[pytest.org]: https://docs.pytest.org/en/7.2.x/_static/pytest_logo_curves.svg
-[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[Vue-url]: https://vuejs.org/
-[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
-[Angular-url]: https://angular.io/
-[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[Svelte-url]: https://svelte.dev/
-[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
-[Laravel-url]: https://laravel.com
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
-[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com 
+⬆️ <sup>(back to [Menu](#table-of-contents))</sup>

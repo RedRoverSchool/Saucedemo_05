@@ -1,21 +1,19 @@
 [tool.poetry]
-name = "saucedemo-05"
+name = "pyletsdoit-team"
 version = "0.1.0"
 description = ""
-authors = ["akioikeda <principewar@live.com>"]
+authors = ["Elena Vorobyeva <elvorob@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-pytest = "^7.2.0"
 selenium = "^4.5.0"
-webdriver-manager = "^3.8.4"
 black = "^22.10.0"
 flake8 = "^5.0.4"
+pytest = "^7.2.0"
+webdriver-manager = "^3.8.4"
+common = "^0.1.2"
+selectors = "^0.0.14"
+pytest-xdist = "^3.0.2"
 pytest-html = "^3.2.0"
-allure-pytest = "^2.11.1"
-
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+pytest-order = "^1.0.1"
