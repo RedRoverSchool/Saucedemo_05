@@ -1,4 +1,3 @@
-import pytest
 import allure
 from pages.detailed_page.detailed_page import DetailedPage
 from pages.detailed_page.detailed_page_locator import DetailedPageLocators

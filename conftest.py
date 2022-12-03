@@ -11,7 +11,6 @@ from selenium.webdriver.safari.options import Options as SafariOptions
 from selenium.webdriver.safari.service import Service as SafariService
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
-from webdriver_manager.opera import OperaDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from conf.browser_config import browser_config
 
@@ -75,10 +74,6 @@ def browser(set_browser_options):
             browser: WebDriver = webdriver.Firefox(
                 service=FirefoxService(GeckoDriverManager().install()), options=options
             )
-        # case "Opera":
-        #     browser: WebDriver = webdriver.Chrome(
-        #         service=ChromeService(OperaDriverManager().install()), options=options
-        #     )
         case "Safari":
             browser: WebDriver = webdriver.Safari(
                 service=SafariService(), options=options

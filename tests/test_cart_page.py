@@ -22,10 +22,10 @@ class TestCartPage:
         assert page.get_element_text(CartPageLocators.DESCR) == "DESCRIPTION"
         assert page.element_is_present(CartPageLocators.BTN_CHECKOUT)
         assert page.get_element_text(CartPageLocators.BTN_CHECKOUT) == "CHECKOUT"
-        assert (
-            page.get_element_text(CartPageLocators.BTN_CONTINUE_SHOPPING)
-            == "CONTINUE SHOPPING"
+        btn_continue_shopping = page.get_element_text(
+            CartPageLocators.BTN_CONTINUE_SHOPPING
         )
+        assert btn_continue_shopping == "CONTINUE SHOPPING"
 
     @allure.epic("Cart Page Test")
     @allure.story("TC_")

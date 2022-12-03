@@ -2,8 +2,12 @@ name: selenium_test
 on:
   pull_request:
     branches:
-      - "develop"
-      - "main"
+      - main
+      - develop
+  push:
+      branches:
+      - main
+      - develop
 
 permissions:
   checks: write
@@ -32,7 +36,7 @@ jobs:
           use-isort: false
           extra-pylint-options: ""
           extra-pycodestyle-options: ""
-          extra-flake8-options: "--count --benchmark --ignore=E501,F401"
+          extra-flake8-options: "--count --benchmark --ignore=E501,F401,F631,W503,F811"
           extra-black-options: ". -S --line-length 79"
           extra-mypy-options: ""
           extra-isort-options: ""

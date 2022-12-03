@@ -1,4 +1,5 @@
 from typing import List
+import logging
 from selenium.webdriver.remote.webelement import WebElement
 from pages.inventory_page.inventory_page import InventoryPage
 from pages.inventory_page.inventory_page_locators import InventoryPageLocators
@@ -28,7 +29,8 @@ class CartPage(InventoryPage):
                 InventoryPageLocators.CART_BADGE
             )
             return int(cart_items_counter.text)
-        except:
+        except Exception as e:
+            logging.error(f"Counter for cart is 0, {e}")
             return 0
 
     def find_items_cart_cards(self) -> List[WebElement]:

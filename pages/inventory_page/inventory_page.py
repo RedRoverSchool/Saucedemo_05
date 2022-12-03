@@ -1,12 +1,10 @@
 from typing import List
-from pages.base_page.base_page import BasePage
 from pages.inventory_page.inventory_page_locators import InventoryPageLocators
-from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 from conf.website_config import WebSiteConfig
 from selenium.webdriver.chrome.webdriver import WebDriver
-
 from pages.login_page.login_page import LoginPage
+import logging
 
 
 class InventoryPage(LoginPage):
@@ -98,5 +96,6 @@ class InventoryPage(LoginPage):
                 InventoryPageLocators.CART_BADGE
             )
             return int(cart_items_counter.text)
-        except:
+        except Exception as e:
+            logging.error(f"Counter for cart is 0, {e}")
             return 0
