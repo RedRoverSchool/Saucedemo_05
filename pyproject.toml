@@ -12,9 +12,10 @@ selenium = "^4.5.0"
 webdriver-manager = "^3.8.4"
 black = "^22.10.0"
 flake8 = "^5.0.4"
-pytest-html = "^3.2.0"
 allure-pytest = "^2.11.1"
-
+Faker = "^15.3.2"
+pytest-xdist = "^3.0.2"
+pytest-failed-screenshot = {git = "https://github.com/demmi/pytest-failed-screenshot.git"}
 
 [build-system]
 requires = ["poetry-core"]
