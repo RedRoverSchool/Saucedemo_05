@@ -54,4 +54,6 @@ class TestOverviewPage:
         assert page.get_price_num(OverviewPageLocator.ITEM_PRICE) == page.get_price_num(
             OverviewPageLocator.ITEM_TOTAL
         )
-        assert page.get_price_num(OverviewPageLocator.ITEM_TOTAL), page.get_price_num(OverviewPageLocator.TAX) == page.get_price_num(OverviewPageLocator.TOTAL)
+        assert page.get_price_num(OverviewPageLocator.ITEM_TOTAL), page.get_price_num(
+            OverviewPageLocator.TAX
+        ) == page.get_price_num(OverviewPageLocator.TOTAL)
