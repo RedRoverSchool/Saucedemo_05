@@ -1,0 +1,7 @@
+2022-12-04 01:24:52 INFO xdist worker is: gw0
+2022-12-04 01:24:52 INFO ====== WebDriver manager ======
+2022-12-04 01:24:52 INFO Get LATEST geckodriver version for 107.0 firefox
+2022-12-04 01:24:52 INFO There is no [linux64] geckodriver for browser 107.0 in cache
+2022-12-04 01:24:52 INFO Getting latest mozilla release info for v0.32.0
+2022-12-04 01:24:52 INFO About to download new driver from https://github.com/mozilla/geckodriver/releases/download/v0.32.0/geckodriver-v0.32.0-linux64.tar.gz
+2022-12-04 01:24:53 INFO Driver has been saved in cache [/home/runner/.wdm/gw0/drivers/geckodriver/linux64/0.32]
