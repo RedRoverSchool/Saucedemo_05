@@ -1,6 +1,6 @@
-from pages.login_page import LoginPage
 import pytest
 from locators.locators import LoginLocators as ll
+from pages.login_page.login_page import LoginPage
 
 
 class TestSample:
