@@ -23,8 +23,12 @@ class TestInventoryPage:
         if page.check_js_errors():
             raise Exception
         inventory_items = page.find_items_cards()
-        inventory_item_names_count = len(set(page.extract_items_names(inventory_items)))
-        inventory_item_descs_count = len(set(page.extract_items_descs(inventory_items)))
+        inventory_item_names_count = len(
+            set(page.extract_items_names(inventory_items))
+        )
+        inventory_item_descs_count = len(
+            set(page.extract_items_descs(inventory_items))
+        )
         inventory_item_img_lnk_count = len(
             set(page.extract_items_links(inventory_items))
         )
@@ -43,7 +47,8 @@ class TestInventoryPage:
         inventory_items = page.find_items_cards()
         prices_list = page.extract_items_prices(inventory_items)
         expected_list = sorted(
-            prices_list, reverse=True if sorting == "Price (high to low)" else False
+            prices_list,
+            reverse=True if sorting == "Price (high to low)" else False,
         )
         assert expected_list == prices_list, "Sorting by price works incorrect"
 

@@ -26,5 +26,7 @@ class LoginPage(BasePage):
         )
 
     def get_alert_text(self):
-        err_container = self.element_is_present(LoginPageLocators.ERR_CONTAINER)
+        err_container = self.element_is_present(
+            LoginPageLocators.ERR_CONTAINER
+        )
         return err_container.text

@@ -53,7 +53,9 @@ class TestYourInfoPage:
             == "CHECKOUT: YOUR INFORMATION"
         )
         assert (
-            page.get_attribute(YourInfoLocators.INPUT_FIRST_NAME, "placeholder")
+            page.get_attribute(
+                YourInfoLocators.INPUT_FIRST_NAME, "placeholder"
+            )
             == "First Name"
         )
         assert (
@@ -65,7 +67,10 @@ class TestYourInfoPage:
             == "Zip/Postal Code"
         )
         assert page.get_element_text(YourInfoLocators.BTN_CANCEL) == "CANCEL"
-        assert page.get_attribute(YourInfoLocators.BTN_CONTINUE, "value") == "Continue"
+        assert (
+            page.get_attribute(YourInfoLocators.BTN_CONTINUE, "value")
+            == "Continue"
+        )
 
     @allure.epic("Checkout: Your Information Page Test")
     @allure.story("TC_005.00.01 all fields are filled")
@@ -109,8 +114,12 @@ class TestYourInfoPage:
             page.click_item_cart_button(item)
         page.click_cart_button()
         page.click_button(CartPageLocators.BTN_CHECKOUT)
-        page.send_keys_to_input(YourInfoLocators.INPUT_LAST_NAME, page.random_word())
-        page.send_keys_to_input(YourInfoLocators.INPUT_ZIP_CODE, page.random_word())
+        page.send_keys_to_input(
+            YourInfoLocators.INPUT_LAST_NAME, page.random_word()
+        )
+        page.send_keys_to_input(
+            YourInfoLocators.INPUT_ZIP_CODE, page.random_word()
+        )
         page.click_continue()
         assert page.get_error_msg_text() == "Error: First Name is required"
 
@@ -125,8 +134,12 @@ class TestYourInfoPage:
             page.click_item_cart_button(item)
         page.click_cart_button()
         page.click_button(CartPageLocators.BTN_CHECKOUT)
-        page.send_keys_to_input(YourInfoLocators.INPUT_FIRST_NAME, page.random_word())
-        page.send_keys_to_input(YourInfoLocators.INPUT_ZIP_CODE, page.random_word())
+        page.send_keys_to_input(
+            YourInfoLocators.INPUT_FIRST_NAME, page.random_word()
+        )
+        page.send_keys_to_input(
+            YourInfoLocators.INPUT_ZIP_CODE, page.random_word()
+        )
         page.click_continue()
         assert page.get_error_msg_text() == "Error: Last Name is required"
 
@@ -141,7 +154,11 @@ class TestYourInfoPage:
             page.click_item_cart_button(item)
         page.click_cart_button()
         page.click_button(CartPageLocators.BTN_CHECKOUT)
-        page.send_keys_to_input(YourInfoLocators.INPUT_FIRST_NAME, page.random_word())
-        page.send_keys_to_input(YourInfoLocators.INPUT_LAST_NAME, page.random_word())
+        page.send_keys_to_input(
+            YourInfoLocators.INPUT_FIRST_NAME, page.random_word()
+        )
+        page.send_keys_to_input(
+            YourInfoLocators.INPUT_LAST_NAME, page.random_word()
+        )
         page.click_continue()
         assert page.get_error_msg_text() == "Error: Postal Code is required"

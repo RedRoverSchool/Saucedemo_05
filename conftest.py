@@ -72,7 +72,8 @@ def browser(set_browser_options):
     match browser_name:
         case "Firefox":
             browser: WebDriver = webdriver.Firefox(
-                service=FirefoxService(GeckoDriverManager().install()), options=options
+                service=FirefoxService(GeckoDriverManager().install()),
+                options=options,
             )
         case "Safari":
             browser: WebDriver = webdriver.Safari(
@@ -85,7 +86,8 @@ def browser(set_browser_options):
             )
         case _:  # Chrome is default browser
             browser: WebDriver = webdriver.Chrome(
-                service=ChromeService(ChromeDriverManager().install()), options=options
+                service=ChromeService(ChromeDriverManager().install()),
+                options=options,
             )
 
     # browser.maximize_window()

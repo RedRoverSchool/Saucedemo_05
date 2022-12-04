@@ -132,7 +132,9 @@ class BasePage:
 
     def is_text_in_element(self, locator, text: str):
         try:
-            result = self.wait.until(EC.text_to_be_present_in_element(locator, text))
+            result = self.wait.until(
+                EC.text_to_be_present_in_element(locator, text)
+            )
         except TimeoutException:
             return False
         else:
@@ -273,7 +275,9 @@ class BasePage:
             if page_loaded and wait_for_element_to_disappear:
                 bad_element = None
                 try:
-                    bad_element = self.element_is_present(wait_for_element_to_disappear)
+                    bad_element = self.element_is_present(
+                        wait_for_element_to_disappear
+                    )
                 except Exception as ex:
                     print(repr(ex))
                 page_loaded = not bad_element

@@ -21,7 +21,9 @@ class TestCartPage:
         assert page.get_element_text(CartPageLocators.TITLE) == "YOUR CART"
         assert page.get_element_text(CartPageLocators.DESCR) == "DESCRIPTION"
         assert page.element_is_present(CartPageLocators.BTN_CHECKOUT)
-        assert page.get_element_text(CartPageLocators.BTN_CHECKOUT) == "CHECKOUT"
+        assert (
+            page.get_element_text(CartPageLocators.BTN_CHECKOUT) == "CHECKOUT"
+        )
         btn_continue_shopping = page.get_element_text(
             CartPageLocators.BTN_CONTINUE_SHOPPING
         )

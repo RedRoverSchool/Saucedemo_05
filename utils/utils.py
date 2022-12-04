@@ -58,7 +58,11 @@ def generate_random_string_of_length_n(n):
 
 def generate_string_ending_with_number(string_starts_with):
     string = "{}{}".format(string_starts_with, random.randint(0, 100))
-    print("Generated string {} starting with {}".format(string, string_starts_with))
+    print(
+        "Generated string {} starting with {}".format(
+            string, string_starts_with
+        )
+    )
     return string
 
 

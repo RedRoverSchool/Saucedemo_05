@@ -70,9 +70,9 @@ class InventoryPage(LoginPage):
         return prices
 
     def extract_item_img_link(self, element: WebElement) -> str:
-        return element.find_element(*InventoryPageLocators.ITEM_IMAGE).get_property(
-            "src"
-        )
+        return element.find_element(
+            *InventoryPageLocators.ITEM_IMAGE
+        ).get_property("src")
 
     def extract_items_links(self, we_list: List[WebElement]) -> List:
         links = []
@@ -81,7 +81,9 @@ class InventoryPage(LoginPage):
         return links
 
     def set_sorting_order(self, sorting: str):
-        self.select_dropdown_option(InventoryPageLocators.DROPDOWN_SORTING, sorting)
+        self.select_dropdown_option(
+            InventoryPageLocators.DROPDOWN_SORTING, sorting
+        )
 
     def click_item_cart_button(self, element: WebElement) -> str:
         element.find_element(*InventoryPageLocators.ITEM_BUTTON).click()
