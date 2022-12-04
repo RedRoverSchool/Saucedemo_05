@@ -1,0 +1,4 @@
+2022-12-04 01:32:04 INFO xdist worker is: gw0
+2022-12-04 01:32:04 INFO ====== WebDriver manager ======
+2022-12-04 01:32:04 INFO Get LATEST geckodriver version for 107.0 firefox
+2022-12-04 01:32:04 INFO Driver [/home/runner/.wdm/gw0/drivers/geckodriver/linux64/0.32/geckodriver] found in cache
