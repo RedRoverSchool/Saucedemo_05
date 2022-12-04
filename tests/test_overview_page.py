@@ -57,3 +57,22 @@ class TestOverviewPage:
         assert page.get_price_num(OverviewPageLocator.ITEM_TOTAL), page.get_price_num(
             OverviewPageLocator.TAX
         ) == page.get_price_num(OverviewPageLocator.TOTAL)
+
+    @allure.epic("Checkout: Overview")
+    @allure.story("TC_005_ Checkout: Overview  -> Bnt Cancel")
+    def test_checkout_click_bnt_cancel(self, browser):
+        page = OverviewPage(browser)
+        page.go_to_overview_page()
+        page.click_cancel()
+        assert browser.current_url == WebSiteConfig.INVENTORY_PAGE_URL
+
+    @allure.epic("Checkout: Overview")
+    @allure.story("TC_005_ Checkout: Overview  -> Bnt Finish")
+    def test_checkout_complete(self, browser):
+        page = OverviewPage(browser)
+        page.go_to_overview_page_one_item()
+        page.click_finish()
+        assert browser.current_url == WebSiteConfig.COMPLETE_URL
+
+    def test_checkout_layout(self):
+        pass
