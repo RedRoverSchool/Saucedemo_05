@@ -1,15 +1,14 @@
 from typing import List
 import logging
+import conf
 from selenium.webdriver.remote.webelement import WebElement
 from pages.inventory_page.inventory_page import InventoryPage
 from pages.inventory_page.inventory_page_locators import InventoryPageLocators
-import conf
-from selenium.webdriver.chrome.webdriver import WebDriver
 from pages.cart_page.cart_page_locators import CartPageLocators
 
 
 class CartPage(InventoryPage):
-    def __init__(self, browser: WebDriver):
+    def __init__(self, browser):
         self.browser = browser
         self.url = conf.CART_PAGE_URL
         super().__init__(browser=self.browser)

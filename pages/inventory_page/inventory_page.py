@@ -1,14 +1,13 @@
 from typing import List
+import conf
 from pages.inventory_page.inventory_page_locators import InventoryPageLocators
 from selenium.webdriver.remote.webelement import WebElement
-import conf
-from selenium.webdriver.chrome.webdriver import WebDriver
 from pages.login_page.login_page import LoginPage
 import logging
 
 
 class InventoryPage(LoginPage):
-    def __init__(self, browser: WebDriver):
+    def __init__(self, browser):
         self.browser = browser
         self.url = conf.INVENTORY_PAGE_URL
         super().__init__(browser=self.browser)
