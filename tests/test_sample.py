@@ -1,6 +1,6 @@
-from pages.login_page import LoginPage
 import pytest
 from locators.locators import LoginLocators as ll
+from pages.login_page_my import LoginPageMy
 
 
 class TestSample:
@@ -11,7 +11,7 @@ class TestSample:
         [('standard_user', 'secret_sauce'), ('problem_user', 'secret_sauce')],
     )
     def test_sample(self, driver, username, password):
-        lp = LoginPage(driver)
+        lp = LoginPageMy(driver)
         assert lp.login_title() == ll.title
         lp.action_login(username, password)
         lp.action_logout()

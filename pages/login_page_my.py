@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from core.core import Core
 
 
-class LoginPage(Core):
+class LoginPageMy(Core):
     def __init__(self, driver):
         Core.__init__(self, driver)
         self.driver = driver

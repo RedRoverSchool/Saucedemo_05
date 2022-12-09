@@ -1,7 +1,7 @@
 from locators.locators import InventoryLocators as il
 
 
-class InventoryPage:
+class InventoryPageKate:
     def __init__(self, driver):
         self.driver = driver
 

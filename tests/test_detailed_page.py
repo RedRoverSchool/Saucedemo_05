@@ -1,6 +1,6 @@
 import allure
 from pages.detailed_page.detailed_page import DetailedPage
-from pages.detailed_page.detailed_page_locator import DetailedPageLocators
+from pages.detailed_page.detailed_page_locators import DetailedPageLocators
 
 
 class TestDetailedPage:
